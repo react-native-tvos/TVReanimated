@@ -1,32 +1,13 @@
 import React from 'react';
-import {
-  FlatList,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TVMenuControl,
-  View,
-  LogBox,
-} from 'react-native';
-import GestureHandler, {ScrollView} from 'react-native-gesture-handler';
+import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, TVMenuControl, View, LogBox } from 'react-native';
+
+import GestureHandler, { ScrollView } from 'react-native-gesture-handler';
+
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
-import {
-  SpringLayoutAnimation,
-  MountingUnmounting,
-  SwipeableList,
-  Modal,
-  Carousel,
-  ModalNewAPI,
-  DefaultAnimations,
-  CustomLayoutAnimationScreen,
-} from './LayoutReanimation';
-
-const RectButton = Platform.isTV ? TouchableOpacity : GestureHandler.RectButton;
+import { NavigationContainer } from '@react-navigation/native';
 
 import Reanimated1 from '../reanimated1/App';
 
@@ -46,108 +27,77 @@ import LiquidSwipe from './LiquidSwipe';
 import ScrollExample from './AnimatedScrollExample';
 LogBox.ignoreLogs(['Calling `getNode()`']);
 
-type Screens = Record<string, {screen: React.ComponentType; title?: string}>;
+const RectButton = Platform.isTV ? TouchableOpacity : GestureHandler.RectButton;
+
+type Screens = Record<string, { screen: React.ComponentType; title?: string }>;
 
 const SCREENS: Screens = {
-  DefaultAnimations: {
-    screen: DefaultAnimations,
-    title: '🆕 Default layout animations',
-  },
-  CustomLayoutAnimation: {
-    screen: CustomLayoutAnimationScreen,
-    title: '🆕 Custom layout animation',
-  },
-  ModalNewAPI: {
-    title: '🆕 ModalNewAPI',
-    screen: ModalNewAPI,
-  },
-  SpringLayoutAnimation: {
-    title: '🆕 Spring Layout Animation',
-    screen: SpringLayoutAnimation,
-  },
-  MountingUnmounting: {
-    title: '🆕 Mounting Unmounting',
-    screen: MountingUnmounting,
-  },
-  SwipeableList: {
-    title: '🆕 Swipeable list',
-    screen: SwipeableList,
-  },
-  Modal: {
-    title: '🆕 Modal',
-    screen: Modal,
-  },
-  Carousel: {
-    title: '🆕 Carousel',
-    screen: Carousel,
-  },
   AnimatedStyleUpdate: {
     screen: AnimatedStyleUpdateExample,
-    title: 'Animated Style Update',
+    title: '🆕 Animated Style Update',
   },
   WobbleExample: {
     screen: WobbleExample,
-    title: 'Animation Modifiers (Wobble Effect)',
+    title: '🆕 Animation Modifiers (Wobble Effect)',
   },
   DragAndSnapExample: {
     screen: DragAndSnapExample,
-    title: 'Drag and Snap',
+    title: '🆕 Drag and Snap',
   },
   MeasureExample: {
     screen: MeasureExample,
-    title: 'Synchronous Measure',
+    title: '🆕 Synchronous Measure',
   },
   ScrollEventExample: {
     screen: ScrollEventExample,
-    title: 'Scroll Events',
+    title: '🆕 Scroll Events',
   },
   ChatHeadsExample: {
     screen: ChatHeadsExample,
-    title: 'Chat Heads',
+    title: '🆕 Chat Heads',
   },
   ScrollableToExample: {
     screen: ScrollToExample,
-    title: 'scrollTo',
+    title: '🆕 scrollTo',
   },
   SwipeableListExample: {
     screen: SwipeableListExample,
-    title: '(advanced) Swipeable List',
+    title: '🆕 (advanced) Swipeable List',
   },
   LightboxExample: {
     screen: LightboxExample,
-    title: '(advanced) Lightbox',
+    title: '🆕 (advanced) Lightbox',
   },
   ScrollableViewExample: {
     screen: ScrollableViewExample,
-    title: '(advanced) ScrollView imitation',
+    title: '🆕 (advanced) ScrollView imitation',
   },
   AnimatedTabBarExample: {
     screen: AnimatedTabBarExample,
-    title: '(advanced) Tab Bar Example',
+    title: '🆕 (advanced) Tab Bar Example',
   },
   LiquidSwipe: {
     screen: LiquidSwipe,
-    title: 'Liquid Swipe Example',
+    title: '🆕 Liquid Swipe Example',
   },
   ExtrapolationExample: {
     screen: ExtrapolationExample,
-    title: 'Extrapolation Example',
+    title: '🆕 Extrapolation Example',
   },
   ScrollExample: {
     screen: ScrollExample,
-    title: 'Scroll Example',
+    title: '🆕 Scroll Example',
   },
 };
 
-type RootStackParams = {Home: undefined} & {[key: string]: undefined};
+type RootStackParams = { Home: undefined } & { [key: string]: undefined };
 type MainScreenProps = {
   navigation: StackNavigationProp<RootStackParams, 'Home'>;
   setUseRea2: (useRea2: boolean) => void;
 };
 
-function MainScreen({navigation, setUseRea2}: MainScreenProps) {
-  const data = Object.keys(SCREENS).map((key) => ({key}));
-  TVMenuControl.enableTVMenuKey();
+function MainScreen({ navigation, setUseRea2 }: MainScreenProps) {
+  const data = Object.keys(SCREENS).map((key) => ({ key }));
   return (
     <FlatList
       style={styles.list}
@@ -157,7 +107,7 @@ function MainScreen({navigation, setUseRea2}: MainScreenProps) {
         <MainScreenItem
           {...props}
           screens={SCREENS}
-          onPressItem={({key}) => navigation.navigate(key)}
+          onPressItem={({ key }) => navigation.navigate(key)}
         />
       )}
       renderScrollComponent={(props) => <ScrollView {...props} />}
@@ -170,10 +120,10 @@ export function ItemSeparator(): React.ReactElement {
   return <View style={styles.separator} />;
 }
 
-type Item = {key: string};
+type Item = { key: string };
 type MainScreenItemProps = {
   item: Item;
-  onPressItem: ({key}: Item) => void;
+  onPressItem: ({ key }: Item) => void;
   screens: Screens;
 };
 export function MainScreenItem({
@@ -181,7 +131,7 @@ export function MainScreenItem({
   onPressItem,
   screens,
 }: MainScreenItemProps): React.ReactElement {
-  const {key} = item;
+  const { key } = item;
   return (
     <RectButton style={styles.button} onPress={() => onPressItem(item)}>
       <Text style={styles.buttonText}>{screens[key].title || key}</Text>
@@ -197,7 +147,6 @@ function LaunchReanimated1({
   return (
     <>
       <ItemSeparator />
-
       <RectButton style={styles.button} onPress={() => setUseRea2?.(false)}>
         <Text style={styles.buttonText}>👵 Reanimated 1.x Examples</Text>
       </RectButton>
@@ -211,7 +160,7 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
-      options={{title: '🎬 Reanimated 2.x Examples'}}
+      options={{ title: '🎬 Reanimated 2.x Examples' }}
       children={(props) => <MainScreen {...props} setUseRea2={setUseRea2} />}
     />
     {Object.keys(SCREENS).map((name) => (
@@ -219,7 +168,7 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
         key={name}
         name={name}
         getComponent={() => SCREENS[name].screen}
-        options={{title: SCREENS[name].title || name}}
+        options={{ title: SCREENS[name].title || name }}
       />
     ))}
   </Stack.Navigator>
@@ -228,6 +177,7 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
 function App(): React.ReactElement {
   const [useRea2, setUseRea2] = React.useState(true);
 
+  TVMenuControl.enableTVMenuKey();
   return (
     <NavigationContainer>
       {useRea2 ? Reanimated2(setUseRea2) : Reanimated1(setUseRea2)}
