@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-svg/RNSVG.podspec b/node_modules/react-native-svg/RNSVG.podspec
+index 28eb91a..f06c66a 100644
+--- a/node_modules/react-native-svg/RNSVG.podspec
++++ b/node_modules/react-native-svg/RNSVG.podspec
+@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
+   s.source            = { :git => 'https://github.com/react-native-community/react-native-svg.git', :tag => "v#{s.version}" }
+   s.source_files      = 'apple/**/*.{h,m}'
+   s.ios.exclude_files = '**/*.macos.{h,m}'
++  s.tvos.exclude_files = '**/*.macos.{h,m}'
+   s.osx.exclude_files = '**/*.ios.{h,m}'
+   s.requires_arc      = true
+   s.dependency          'React'

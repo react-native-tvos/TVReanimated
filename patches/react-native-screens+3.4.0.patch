@@ -1,0 +1,114 @@
+diff --git a/node_modules/react-native-screens/ios/RNSScreenStack.m b/node_modules/react-native-screens/ios/RNSScreenStack.m
+index 7b76e12..46a9093 100644
+--- a/node_modules/react-native-screens/ios/RNSScreenStack.m
++++ b/node_modules/react-native-screens/ios/RNSScreenStack.m
+@@ -45,11 +45,13 @@
+ 
+ @end
+ 
++#if !TARGET_OS_TV
+ @interface RNSGestureRecognizer: UIScreenEdgePanGestureRecognizer
+ @end
+ 
+ @implementation RNSGestureRecognizer
+ @end
++#endif
+ 
+ @implementation RNSScreenStackView {
+   UINavigationController *_controller;
+@@ -527,6 +529,7 @@
+     return NO;
+   }
+   
++#if !TARGET_OS_TV
+   if ([gestureRecognizer isKindOfClass:[RNSGestureRecognizer class]]) {
+     // if we do not set any explicit `semanticContentAttribute`, it is `UISemanticContentAttributeUnspecified` instead of `UISemanticContentAttributeForceLeftToRight`, so we just check if it is RTL or not
+     BOOL isCorrectEdge = (_controller.view.semanticContentAttribute == UISemanticContentAttributeForceRightToLeft && ((RNSGestureRecognizer *)gestureRecognizer).edges == UIRectEdgeRight) ||
+@@ -535,13 +538,16 @@
+       return topScreen.stackAnimation == RNSScreenStackAnimationSimplePush;
+     }
+     return NO;
+-  } else {
++  } else
++#endif
++  {
+     return topScreen.stackAnimation != RNSScreenStackAnimationSimplePush;
+   }
+ }
+ 
+ - (void)setupGestureHandlers
+ {
++#if !TARGET_OS_TV
+   // gesture recognizers for custom stack animations
+   RNSGestureRecognizer *leftEdgeSwipeGestureRecognizer = [[RNSGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+   leftEdgeSwipeGestureRecognizer.edges = UIRectEdgeLeft;
+@@ -598,6 +604,7 @@
+       break;
+     }
+   }
++#endif
+ }
+ 
+ - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController
+diff --git a/node_modules/react-native-screens/ios/RNSScreenStackHeaderConfig.m b/node_modules/react-native-screens/ios/RNSScreenStackHeaderConfig.m
+index 425c636..1adb896 100644
+--- a/node_modules/react-native-screens/ios/RNSScreenStackHeaderConfig.m
++++ b/node_modules/react-native-screens/ios/RNSScreenStackHeaderConfig.m
+@@ -509,6 +509,7 @@ API_AVAILABLE(ios(13.0)){
+         break;
+       }
+       case RNSScreenStackHeaderSubviewTypeSearchBar: {
++#if !TARGET_OS_TV
+         if ([subview.subviews[0] isKindOfClass:[RNSSearchBar class]]) {
+           if (@available(iOS 11.0, *)) {
+             RNSSearchBar *searchBar = subview.subviews[0];
+@@ -516,6 +517,7 @@ API_AVAILABLE(ios(13.0)){
+             navitem.hidesSearchBarWhenScrolling = searchBar.hideWhenScrolling;
+           }
+         }
++#endif
+       }
+       case RNSScreenStackHeaderSubviewTypeBackButton: {
+         break;
+diff --git a/node_modules/react-native-screens/ios/RNSSearchBar.m b/node_modules/react-native-screens/ios/RNSSearchBar.m
+index afd7988..f6c315c 100644
+--- a/node_modules/react-native-screens/ios/RNSSearchBar.m
++++ b/node_modules/react-native-screens/ios/RNSSearchBar.m
+@@ -55,7 +55,7 @@
+ 
+ - (void)setBarTintColor:(UIColor *)barTintColor
+ {
+-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
++#if !TARGET_OS_TV && defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
+     __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+   if (@available(iOS 13.0, *)) {
+     [_controller.searchBar.searchTextField setBackgroundColor:barTintColor];
+@@ -65,7 +65,7 @@
+ 
+ - (void)setTextColor:(UIColor *)textColor
+ {
+-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
++#if !TARGET_OS_TV && defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
+     __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+   _textColor = textColor;
+   if (@available(iOS 13.0, *)) {
+@@ -78,7 +78,7 @@
+ 
+ - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+ {
+-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
++#if !TARGET_OS_TV && defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
+     __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+   if (@available(iOS 13.0, *)) {
+     // for some reason, the color does not change when set at the beginning,
+@@ -88,8 +88,9 @@
+     }
+   }
+ #endif
+-  
++#if !TARGET_OS_TV
+   [_controller.searchBar setShowsCancelButton:YES animated:YES];
++#endif
+   [self becomeFirstResponder];
+ 
+   if (self.onFocus) {
