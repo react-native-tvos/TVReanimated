@@ -697,7 +697,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = TVReanimated/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

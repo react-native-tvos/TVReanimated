@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, View, LogBox } from 'react-native';
 
-import GestureHandler, { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -26,8 +26,6 @@ import TransitionsSequence from './transitions/sequence';
 import TransitionsShuffle from './transitions/shuffle';
 import TransitionsTicket from './transitions/ticket';
 import WidthAndHeight from './widthAndHeight';
-
-const RectButton = Platform.isTV ? TouchableOpacity : GestureHandler.RectButton;
 
 LogBox.ignoreLogs([
   'Warning: isMounted(...) is deprecated',
@@ -113,9 +111,9 @@ function LaunchReanimated2({ setUseRea2 }) {
   return (
     <>
       <ItemSeparator />
-      <RectButton style={styles.button} onPress={() => setUseRea2?.(true)}>
+      <TouchableOpacity style={styles.button} onPress={() => setUseRea2?.(true)}>
         <Text style={styles.buttonText}>🎬 Reanimated 2.x Examples</Text>
-      </RectButton>
+      </TouchableOpacity>
     </>
   );
 }
@@ -127,9 +125,9 @@ class MainScreenItem extends React.Component {
   render() {
     const { key } = this.props.item;
     return (
-      <RectButton style={styles.button} onPress={this._onPress}>
+      <TouchableOpacity style={styles.button} onPress={this._onPress}>
         <Text style={styles.buttonText}>{SCREENS[key].title || key}</Text>
-      </RectButton>
+      </TouchableOpacity>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, TVMenuControl, View, LogBox } from 'react-native';
 
-import GestureHandler, { ScrollView } from 'react-native-gesture-handler';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 import {
   createStackNavigator,
@@ -26,8 +26,6 @@ import LightboxExample from './LightboxExample';
 import LiquidSwipe from './LiquidSwipe';
 import ScrollExample from './AnimatedScrollExample';
 LogBox.ignoreLogs(['Calling `getNode()`']);
-
-const RectButton = Platform.isTV ? TouchableOpacity : GestureHandler.RectButton;
 
 type Screens = Record<string, { screen: React.ComponentType; title?: string }>;
 
@@ -133,9 +131,9 @@ export function MainScreenItem({
 }: MainScreenItemProps): React.ReactElement {
   const { key } = item;
   return (
-    <RectButton style={styles.button} onPress={() => onPressItem(item)}>
+    <TouchableOpacity style={styles.button} onPress={() => onPressItem(item)}>
       <Text style={styles.buttonText}>{screens[key].title || key}</Text>
-    </RectButton>
+    </TouchableOpacity>
   );
 }
 
@@ -147,9 +145,9 @@ function LaunchReanimated1({
   return (
     <>
       <ItemSeparator />
-      <RectButton style={styles.button} onPress={() => setUseRea2?.(false)}>
+      <TouchableOpacity style={styles.button} onPress={() => setUseRea2?.(false)}>
         <Text style={styles.buttonText}>👵 Reanimated 1.x Examples</Text>
-      </RectButton>
+      </TouchableOpacity>
     </>
   );
 }
