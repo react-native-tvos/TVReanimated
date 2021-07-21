@@ -33,58 +33,72 @@ const SCREENS: Screens = {
   AnimatedStyleUpdate: {
     screen: AnimatedStyleUpdateExample,
     title: '🆕 Animated Style Update',
+    tv: true,
   },
   WobbleExample: {
     screen: WobbleExample,
     title: '🆕 Animation Modifiers (Wobble Effect)',
+    tv: true,
   },
   DragAndSnapExample: {
     screen: DragAndSnapExample,
     title: '🆕 Drag and Snap',
+    tv: false,
   },
   MeasureExample: {
     screen: MeasureExample,
     title: '🆕 Synchronous Measure',
+    tv: true,
   },
   ScrollEventExample: {
     screen: ScrollEventExample,
     title: '🆕 Scroll Events',
+    tv: false,
   },
   ChatHeadsExample: {
     screen: ChatHeadsExample,
     title: '🆕 Chat Heads',
+    tv: false,
   },
   ScrollableToExample: {
     screen: ScrollToExample,
     title: '🆕 scrollTo',
+    tv: false,
   },
   SwipeableListExample: {
     screen: SwipeableListExample,
     title: '🆕 (advanced) Swipeable List',
+    tv: false,
   },
   LightboxExample: {
     screen: LightboxExample,
     title: '🆕 (advanced) Lightbox',
+    tv: false,
   },
   ScrollableViewExample: {
     screen: ScrollableViewExample,
     title: '🆕 (advanced) ScrollView imitation',
+    tv: false,
   },
   AnimatedTabBarExample: {
     screen: AnimatedTabBarExample,
     title: '🆕 (advanced) Tab Bar Example',
+    tv: true,
   },
   LiquidSwipe: {
     screen: LiquidSwipe,
     title: '🆕 Liquid Swipe Example',
+    tv: false,
   },
   ExtrapolationExample: {
     screen: ExtrapolationExample,
     title: '🆕 Extrapolation Example',
+    tv: false,
   },
   ScrollExample: {
     screen: ScrollExample,
     title: '🆕 Scroll Example',
+    tv: false,
   },
 };
 
@@ -95,7 +109,7 @@ type MainScreenProps = {
 };
 
 function MainScreen({ navigation, setUseRea2 }: MainScreenProps) {
-  const data = Object.keys(SCREENS).map((key) => ({ key }));
+  const data = Object.keys(SCREENS).filter((key) => SCREENS[key].tv || !Platform.isTV).map((key) => ({ key }));
   return (
     <FlatList
       style={styles.list}

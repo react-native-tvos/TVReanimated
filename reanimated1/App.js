@@ -35,48 +35,56 @@ LogBox.ignoreLogs([
 // https://github.com/react-navigation/react-navigation/issues/3956
 
 const SCREENS = {
-  Snappable: { screen: Snappable, title: 'Snappable' },
-  Test: { screen: Test, title: 'Test' },
-  ImageViewer: { screen: ImageViewer, title: 'Image Viewer' },
-  Interactable: { screen: InteractablePlayground, title: 'Interactable' },
-  Interpolate: { screen: Interpolate, title: 'Interpolate' },
-  Colors: { screen: Colors, title: 'Colors' },
-  StartAPI: { screen: StartAPI, title: 'Start API' },
-  chatHeads: { screen: ChatHeads, title: 'Chat heads (iOS only)' },
-  code: { screen: Code, title: 'Animated.Code component' },
-  width: { screen: WidthAndHeight, title: 'width & height & more' },
-  rotations: { screen: Rotations, title: 'rotations (concat node)' },
+  Snappable: { screen: Snappable, title: 'Snappable' , tv: false },
+  Test: { screen: Test, title: 'Test' , tv: true },
+  ImageViewer: { screen: ImageViewer, title: 'Image Viewer' , tv: false },
+  Interactable: { screen: InteractablePlayground, title: 'Interactable' , tv: false },
+  Interpolate: { screen: Interpolate, title: 'Interpolate' , tv: true },
+  Colors: { screen: Colors, title: 'Colors' , tv: false },
+  StartAPI: { screen: StartAPI, title: 'Start API' , tv: false },
+  chatHeads: { screen: ChatHeads, title: 'Chat heads (iOS only)' , tv: false },
+  code: { screen: Code, title: 'Animated.Code component' , tv: false },
+  width: { screen: WidthAndHeight, title: 'width & height & more' , tv: false },
+  rotations: { screen: Rotations, title: 'rotations (concat node)' , tv: false },
   imperative: {
     screen: Imperative,
     title: 'imperative (set value / toggle visibility)',
+    tv: false,
   },
   panRotateAndZoom: {
     screen: PanRotateAndZoom,
     title: 'Pan, rotate and zoom (via native event function)',
+    tv: false,
   },
   progressBar: {
     screen: ProgressBar,
     title: 'Progress bar',
+    tv: false,
   },
   differentSpringConfigs: {
     screen: DifferentSpringConfigs,
     title: 'Different Spring Configs',
+    tv: false,
   },
   transitionsSequence: {
     screen: TransitionsSequence,
     title: 'Transitions sequence',
+    tv: false,
   },
   transitionsShuffle: {
     screen: TransitionsShuffle,
     title: 'Transitions shuffle',
+    tv: false,
   },
   transitionsProgress: {
     screen: TransitionsProgress,
     title: 'Transitions progress bar',
+    tv: false,
   },
   transitionsTicket: {
     screen: TransitionsTicket,
     title: 'Transitions – flight ticket demo',
+    tv: false,
   },
 };
 
@@ -86,7 +94,7 @@ class MainScreen extends React.Component {
   };
 
   render() {
-    const data = Object.keys(SCREENS).map((key) => ({ key }));
+    const data = Object.keys(SCREENS).filter((key) => SCREENS[key].tv || !Platform.isTV).map((key) => ({ key }));
     return (
       <FlatList
         style={styles.list}
