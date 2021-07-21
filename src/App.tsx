@@ -73,7 +73,7 @@ const SCREENS: Screens = {
   LightboxExample: {
     screen: LightboxExample,
     title: '🆕 (advanced) Lightbox',
-    tv: false,
+    tv: true,
   },
   ScrollableViewExample: {
     screen: ScrollableViewExample,

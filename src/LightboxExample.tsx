@@ -18,6 +18,8 @@ import {
   Image,
   Platform,
   StatusBar,
+  TouchableOpacity,
+  useTVEventHandler,
 } from 'react-native';
 import {
   ScrollView,
@@ -127,11 +129,13 @@ function ListItem({ item, index, onPress }: ListItemProps) {
   });
 
   return (
-    <TapGestureHandler onGestureEvent={handler}>
-      <Animated.View style={containerStyle}>
-        <AnimatedImage ref={ref} source={{ uri: item.uri }} style={styles} />
-      </Animated.View>
-    </TapGestureHandler>
+    <TouchableOpacity onPress={handlePress}>
+      <TapGestureHandler onGestureEvent={handler}>
+        <Animated.View style={containerStyle}>
+          <AnimatedImage ref={ref} source={{ uri: item.uri }} style={styles} />
+        </Animated.View>
+      </TapGestureHandler>
+    </TouchableOpacity>
   );
 }
 
@@ -150,9 +154,17 @@ function ImageTransition({
   const { item, x, y, width, height, imageOpacity } = activeImage;
   const { uri } = item;
 
-  const targetWidth = dimensions.width;
-  const scaleFactor = item.width / targetWidth;
-  const targetHeight = item.height / scaleFactor;
+  let targetHeight, targetWidth, scaleFactor;
+
+  if (dimensions.width > dimensions.height) {
+    targetHeight = dimensions.height;
+    scaleFactor = item.height / targetHeight;
+    targetWidth = item.width / scaleFactor;
+  } else {
+    targetWidth = dimensions.width;
+    scaleFactor = item.width / targetWidth;
+    targetHeight = item.height / scaleFactor;
+  }
 
   const headerHeight = useHeaderHeight();
 
@@ -161,10 +173,19 @@ function ImageTransition({
   const backdropOpacity = useSharedValue(0);
   const scale = useSharedValue(1);
 
-  const targetX = useSharedValue(0);
-  const targetY = useSharedValue(
-    (dimensions.height - targetHeight) / 2 - headerHeight
-  );
+  let targetX, targetY;
+
+  if (dimensions.width > dimensions.height) {
+    targetY = useSharedValue(0);
+    targetX = useSharedValue(
+      (dimensions.width - targetWidth) / 2
+    );
+  } else {
+    targetX = useSharedValue(0);
+    targetY = useSharedValue(
+      (dimensions.height - targetHeight) / 2 - headerHeight
+    );
+  }
 
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
@@ -220,6 +241,29 @@ function ImageTransition({
     },
   });
 
+  const shrink = () => {
+    targetX.value = translateX.value - targetX.value * -1;
+    targetY.value = translateY.value - targetY.value * -1;
+
+    translateX.value = 0;
+    translateY.value = 0;
+
+    animationProgress.value = withTiming(0, timingConfig, () => {
+      imageOpacity.value = withTiming(
+        1,
+        {
+          duration: 16,
+        },
+        () => {
+          runOnJS(onClose)();
+        }
+      );
+    });
+
+    backdropOpacity.value = withTiming(0, timingConfig);
+    scale.value = withTiming(1, timingConfig);
+  };
+
   const imageStyles = useAnimatedStyle(() => {
     const interpolateProgress = (range: [number, number]) =>
       interpolate(animationProgress.value, [0, 1], range, Extrapolate.CLAMP);
@@ -249,6 +293,12 @@ function ImageTransition({
     };
   });
 
+  useTVEventHandler((evt) => {
+    if (evt.eventType === 'left') {
+      shrink();
+    }
+  });
+
   useEffect(() => {
     // fixes flickering
     requestAnimationFrame(() => {
@@ -262,7 +312,6 @@ function ImageTransition({
   return (
     <View style={StyleSheet.absoluteFillObject}>
       <Animated.View style={[styles.backdrop, backdropStyles]} />
-
       <PanGestureHandler onGestureEvent={onPan}>
         <Animated.View style={StyleSheet.absoluteFillObject}>
           <AnimatedImage source={{ uri }} style={imageStyles} />
@@ -273,10 +322,17 @@ function ImageTransition({
 }
 
 const images: ExampleImage[] = Array.from({ length: 30 }, (_, index) => {
+  let imageSize;
+  if (dimensions.width > 800) {
+    imageSize = 800;
+  } else {
+    imageSize = 400;
+  }
+
   return {
-    uri: `https://picsum.photos/id/${index + 10}/400/400`,
-    width: dimensions.width,
-    height: 400,
+    uri: `https://picsum.photos/id/${index + 10}/${imageSize}/${imageSize}`,
+    width: imageSize,
+    height: imageSize,
   };
 });
 
