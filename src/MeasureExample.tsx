@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, RefObject, useRef } from 'react';
-import { StyleSheet, View, Text, Platform } from 'react-native';
+import { StyleSheet, View, Text, Platform, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
@@ -197,6 +197,14 @@ function SectionHeader({
     };
   }
 
+  const onPress = async () => {
+    try {
+      applyMeasure(await asyncMeasure(animatedRef));
+    } catch (e) {
+      console.log(e);
+      throw new Error('measure failed: ' + e);
+    }
+  };
   const handler = useAnimatedGestureHandler<TapGestureHandlerGestureEvent>({
     onActive: onActiveImpl,
   });
@@ -210,15 +218,17 @@ function SectionHeader({
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <Text>{title}</Text>
         {show && (
-          <TapGestureHandler onHandlerStateChange={handler}>
-            <Animated.View
-              style={{ backgroundColor: 'gray', borderRadius: 10, padding: 5 }}>
-              <Text style={{ color: 'white' }}>trigger</Text>
-            </Animated.View>
-          </TapGestureHandler>
+          <TouchableOpacity onPress={() => onPress()}>
+            <TapGestureHandler onHandlerStateChange={handler}>
+              <Animated.View
+                style={{ backgroundColor: 'gray', borderRadius: 10, padding: 5 }}>
+                <Text style={{ color: 'white' }}>trigger</Text>
+              </Animated.View>
+            </TapGestureHandler>
+          </TouchableOpacity>
         )}
+        <Text>{title}</Text>
       </View>
     </View>
   );
