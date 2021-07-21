@@ -38,7 +38,7 @@ const SCREENS = {
   Snappable: { screen: Snappable, title: 'Snappable' , tv: false },
   Test: { screen: Test, title: 'Test' , tv: true },
   ImageViewer: { screen: ImageViewer, title: 'Image Viewer' , tv: false },
-  Interactable: { screen: InteractablePlayground, title: 'Interactable' , tv: false },
+  Interactable: { screen: InteractablePlayground, title: 'Interactable' , tv: true },
   Interpolate: { screen: Interpolate, title: 'Interpolate' , tv: true },
   Colors: { screen: Colors, title: 'Colors' , tv: false },
   StartAPI: { screen: StartAPI, title: 'Start API' , tv: false },
@@ -88,17 +88,20 @@ const SCREENS = {
   },
 };
 
+const SCREEN_KEYS = Object.keys(SCREENS).filter((key) => SCREENS[key].tv || !Platform.isTV);
+
 class MainScreen extends React.Component {
   static navigationOptions = {
     title: '👵 Reanimated 1.x Examples',
   };
 
   render() {
-    const data = Object.keys(SCREENS).filter((key) => SCREENS[key].tv || !Platform.isTV).map((key) => ({ key }));
+    const data = SCREEN_KEYS.map((key) => ({ key }));
     return (
       <FlatList
         style={styles.list}
         data={data}
+        keyExtractor={item => item.key}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={(props) => (
           <MainScreenItem
@@ -149,7 +152,7 @@ const Navigator = (setUseRea2) => (
       options={{ title: '👵 Reanimated 1.x Examples' }}
       children={(props) => <MainScreen {...props} setUseRea2={setUseRea2} />}
     />
-    {Object.keys(SCREENS).map((name) => (
+    {SCREEN_KEYS.map((name) => (
       <Stack.Screen
         key={name}
         name={name}

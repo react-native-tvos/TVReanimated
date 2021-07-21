@@ -39,6 +39,7 @@ class MainScreen extends React.Component {
     return (
       <FlatList
         style={styles.list}
+        keyExtractor={item => item.key}
         data={examples}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={this.renderItem}

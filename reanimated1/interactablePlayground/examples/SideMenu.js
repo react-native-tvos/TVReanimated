@@ -54,9 +54,9 @@ export default class SideMenu extends Component {
           <Text style={styles.headerTitle}>Side Menu Example</Text>
         </View>
 
-        <View style={styles.body}>
+        <TouchableOpacity style={styles.body} onPress={() => {}}>
           <Text style={styles.content}>Some Content Here</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }

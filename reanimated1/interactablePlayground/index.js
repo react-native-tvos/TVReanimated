@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { Platform, StyleSheet, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 // Basic Examples
 import ChatHeads from './examples/ChatHeads';
@@ -31,11 +31,11 @@ import CollapsibleCalendar from './real-life-examples/CollapsibleCalendar';
 import RealChatHeads from './real-life-examples/RealChatHeads';
 
 export const SCREENS = {
-  IChatHeads: { screen: ChatHeads, title: 'Chat Heads' },
-  ISwipeableCard: { screen: SwipeableCard, title: 'Swipeable Card' },
-  IMoreDrawers: { screen: MoreDrawers, title: 'More Drawers (row actions)' },
-  IMoreChatHeads: { screen: MoreChatHeads, title: 'More Chat Heads' },
-  IHandleTouches: { screen: HandleTouches, title: 'Handle Touches' },
+  IChatHeads: { screen: ChatHeads, title: 'Chat Heads' , tv:false },
+  ISwipeableCard: { screen: SwipeableCard, title: 'Swipeable Card' , tv:false },
+  IMoreDrawers: { screen: MoreDrawers, title: 'More Drawers (row actions)' , tv:false },
+  IMoreChatHeads: { screen: MoreChatHeads, title: 'More Chat Heads' , tv:false },
+  IHandleTouches: { screen: HandleTouches, title: 'Handle Touches' , tv:false },
   // ITouchesInside: {
   //   screen: TouchesInside,
   //   title: 'Touches Inside (interactive)',
@@ -45,40 +45,46 @@ export const SCREENS = {
   //   title: 'Touches Inside (static)',
   // },
   // IHandleRelayout: { screen: HandleRelayout, title: 'Handle Relayout' },
-  ISideMenu: { screen: SideMenu, title: 'Side Menu (imperative cmd)' },
-  ISnapTo: { screen: SnapTo, title: 'Snap To (imperative cmd)' },
+  ISideMenu: { screen: SideMenu, title: 'Side Menu (imperative cmd)' , tv:true },
+  ISnapTo: { screen: SnapTo, title: 'Snap To (imperative cmd)' , tv:true },
   IChangePosition: {
     screen: ChangePosition,
     title: 'Change Position (imperative cmd)',
+    tv:true,
   },
   // IAlertAreas: { screen: AlertAreas, title: 'Alert Areas and Drag Event' },
   ICollapsingHeaderWithScroll: {
     screen: CollapsingHeaderWithScroll,
     title: 'Collapsing Header with Scroll',
+    tv:false,
   },
-  IRowActions1: { screen: RowActions1, title: 'Row Actions (Google Style)' },
-  IRowActions2: { screen: RowActions2, title: 'Row Actions (Apple Style)' },
-  INowCard: { screen: NowCard, title: 'Google Now-Style Card' },
-  ITinderCard: { screen: TinderCard, title: 'Tinder-Style Card' },
-  INotifPanel: { screen: NotifPanel, title: 'Notification Panel' },
-  IMapPanel: { screen: MapPanel, title: 'Apple Maps-Style Panel' },
+  IRowActions1: { screen: RowActions1, title: 'Row Actions (Google Style)' , tv:false },
+  IRowActions2: { screen: RowActions2, title: 'Row Actions (Apple Style)' , tv:false },
+  INowCard: { screen: NowCard, title: 'Google Now-Style Card' , tv:false },
+  ITinderCard: { screen: TinderCard, title: 'Tinder-Style Card' , tv:false },
+  INotifPanel: { screen: NotifPanel, title: 'Notification Panel' , tv:false },
+  IMapPanel: { screen: MapPanel, title: 'Apple Maps-Style Panel' , tv:false },
   ICollapsibleFilter: {
     screen: CollapsibleFilter,
     title: 'Collapsible Filter',
+    tv:false,
   },
   ICollapsibleCalendar: {
     screen: CollapsibleCalendar,
     title: 'Collapsible Calendar (Any.do-Style)',
+    tv:false,
   },
-  IRealChatHeads: { screen: RealChatHeads, title: 'Real Chat Heads' },
+  IRealChatHeads: { screen: RealChatHeads, title: 'Real Chat Heads' , tv:false },
 };
+
+const SCREEN_KEYS = Object.keys(SCREENS).filter((key) => SCREENS[key].tv || !Platform.isTV);
 
 export default class MainScreen extends Component {
   static navigationOptions = {
     title: 'react-native-interactable',
   };
   render() {
-    const data = Object.keys(SCREENS).map(key => ({ key }));
+    const data = SCREEN_KEYS.map(key => ({ key }));
     return (
       <FlatList
         style={styles.list}
@@ -103,9 +109,9 @@ class MainScreenItem extends React.Component {
   render() {
     const { key } = this.props.item;
     return (
-      <RectButton style={styles.button} onPress={this._onPress}>
+      <TouchableOpacity style={styles.button} onPress={this._onPress}>
         <Text style={styles.buttonText}>{SCREENS[key].title || key}</Text>
-      </RectButton>
+      </TouchableOpacity>
     );
   }
 }
