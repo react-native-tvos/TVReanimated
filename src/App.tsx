@@ -63,7 +63,7 @@ const SCREENS: Screens = {
   ScrollableToExample: {
     screen: ScrollToExample,
     title: '🆕 scrollTo',
-    tv: false,
+    tv: true,
   },
   SwipeableListExample: {
     screen: SwipeableListExample,

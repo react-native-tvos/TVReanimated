@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, Platform } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
@@ -28,14 +28,53 @@ function ScrollToScreen(): React.ReactElement {
     return val;
   });
 
+  const changeProgress = (newValue) => {
+    let result = newValue; 
+    if (result > 1.0) {
+      result = 1.0;
+    }
+    if (result < 0.0) {
+      result = 0.0;
+    }
+    progress.value = result;
+  };
+
+  const increment = () => {
+    changeProgress(progress.value + Math.random()*0.1);
+  };
+
+  const decrement = () => {
+    changeProgress(progress.value - Math.random()*0.1);
+  };
+
+  const setRandom = () => {
+    changeProgress(Math.random());
+  };
+
   return (
     <SafeAreaView>
       <View style={{ alignItems: 'center' }}>
+        {Platform.isTV ? (
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity style={{ margin: 20 }} onPress={decrement}>
+              <Text>Decrement</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ margin: 20 }} onPress={setRandom}>
+              <Text>Set Random</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ margin: 20 }} onPress={increment}>
+              <Text>Increment</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View>
+            <Text>move dot</Text>
+            <View>
+              <ProgressBar progress={progress} />
+            </View>
+          </View>
+        )}
         <NumberDisplay number={number} />
-        <Text>move dot</Text>
-        <View>
-          <ProgressBar progress={progress} />
-        </View>
       </View>
     </SafeAreaView>
   );
