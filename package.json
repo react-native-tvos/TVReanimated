@@ -1,6 +1,8 @@
 {
   "name": "tvreanimated",
   "version": "0.0.1",
+  "description": "Demo of react-native-reanimated on TV platforms",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "postinstall": "patch-package",
