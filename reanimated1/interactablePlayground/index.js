@@ -116,6 +116,8 @@ class MainScreenItem extends React.Component {
   }
 }
 
+const scale = Platform.isTVOS ? 1.0 : 0.5;
+
 const styles = StyleSheet.create({
   list: {
     backgroundColor: '#EFEFF4',
@@ -126,10 +128,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     backgroundColor: 'transparent',
+    fontSize: 30 * scale,
   },
   button: {
     flex: 1,
-    height: 60,
+    height: 100 * scale,
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',

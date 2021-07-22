@@ -172,7 +172,7 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
-      options={{ title: '🎬 Reanimated 2.x Examples' }}
+      options={headerOptions('🎬 Reanimated 2.x Examples')}
       children={(props) => <MainScreen {...props} setUseRea2={setUseRea2} />}
     />
     {Object.keys(SCREENS).map((name) => (
@@ -180,7 +180,7 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
         key={name}
         name={name}
         getComponent={() => SCREENS[name].screen}
-        options={{ title: SCREENS[name].title || name }}
+        options={headerOptions(SCREENS[name].title || name)}
       />
     ))}
   </Stack.Navigator>
@@ -197,6 +197,16 @@ function App(): React.ReactElement {
   );
 }
 
+const scale = Platform.isTVOS ? 1.0 : 0.5;
+
+const headerOptions = (title) => {
+  return {
+    title,
+    headerTitleStyle: styles.headerTitle,
+    headerStyle: styles.header,
+  };
+};
+
 export const styles = StyleSheet.create({
   list: {
     backgroundColor: '#EFEFF4',
@@ -207,15 +217,24 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     backgroundColor: 'transparent',
+    fontSize: 30 * scale,
   },
   button: {
     flex: 1,
-    height: 60,
+    height: 100 * scale,
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
   },
+  headerTitle: {
+    fontSize: 50 * scale,
+  },
+  header: {
+    height: 200 * scale,
+  },
 });
+
+
 
 export default App;

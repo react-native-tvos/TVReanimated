@@ -149,7 +149,7 @@ const Navigator = (setUseRea2) => (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
-      options={{ title: '👵 Reanimated 1.x Examples' }}
+      options={headerOptions('👵 Reanimated 1.x Examples')}
       children={(props) => <MainScreen {...props} setUseRea2={setUseRea2} />}
     />
     {SCREEN_KEYS.map((name) => (
@@ -157,7 +157,7 @@ const Navigator = (setUseRea2) => (
         key={name}
         name={name}
         getComponent={() => SCREENS[name].screen}
-        options={{ title: SCREENS[name].title || name }}
+        options={headerOptions(SCREENS[name].title || name)}
       />
     ))}
     {Object.keys(INTERACTABLE_SCREENS).map((name) => (
@@ -165,13 +165,23 @@ const Navigator = (setUseRea2) => (
         key={name}
         name={name}
         getComponent={() => INTERACTABLE_SCREENS[name].screen}
-        options={{ title: INTERACTABLE_SCREENS[name].title || name }}
+        options={headerOptions(INTERACTABLE_SCREENS[name].title || name)}
       />
     ))}
   </Stack.Navigator>
 );
 
 export default Navigator;
+
+const headerOptions = (title) => {
+  return {
+    title,
+    headerTitleStyle: styles.headerTitle,
+    headerStyle: styles.header,
+  };
+};
+
+const scale = Platform.isTVOS ? 1.0 : 0.5;
 
 const styles = StyleSheet.create({
   list: {
@@ -184,12 +194,22 @@ const styles = StyleSheet.create({
   buttonText: {
     backgroundColor: 'transparent',
   },
+  buttonText: {
+    backgroundColor: 'transparent',
+    fontSize: 30 * scale,
+  },
   button: {
     flex: 1,
-    height: 60,
+    height: 100 * scale,
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
+  },
+  headerTitle: {
+    fontSize: 50 * scale,
+  },
+  header: {
+    height: 200 * scale,
   },
 });
