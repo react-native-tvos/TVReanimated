@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import {View} from 'react-native';
 import Animated, {
   useSharedValue,
   withSpring,
@@ -42,10 +42,10 @@ function DragAndSnap(): React.ReactElement {
 
   const stylez = useAnimatedStyle(() => {
     const H = Math.round(
-      interpolate(translation.x.value, [0, 300], [0, 360], Extrapolate.CLAMP)
+      interpolate(translation.x.value, [0, 300], [0, 360], Extrapolate.CLAMP),
     );
     const S = Math.round(
-      interpolate(translation.y.value, [0, 500], [100, 50], Extrapolate.CLAMP)
+      interpolate(translation.y.value, [0, 500], [100, 50], Extrapolate.CLAMP),
     );
     const backgroundColor = `hsl(${H},${S}%,50%)`;
     return {
@@ -62,7 +62,7 @@ function DragAndSnap(): React.ReactElement {
   });
 
   return (
-    <View style={{ flex: 1, margin: 50 }}>
+    <View style={{flex: 1, margin: 50}}>
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View
           style={[

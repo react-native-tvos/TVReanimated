@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions, Alert } from 'react-native';
+import {StyleSheet, View, Text, Dimensions, Alert} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedGestureHandler,
@@ -64,7 +64,7 @@ function SwipableList(): React.ReactElement {
     <View style={s.container}>
       <FlatList
         data={data}
-        renderItem={({ item }) => <ListItem item={item} onRemove={onRemove} />}
+        renderItem={({item}) => <ListItem item={item} onRemove={onRemove} />}
         keyExtractor={(item) => item.id}
       />
     </View>
@@ -94,7 +94,7 @@ type ListItemProps = {
   item: Data;
   onRemove: () => void;
 };
-function ListItem({ item, onRemove }: ListItemProps) {
+function ListItem({item, onRemove}: ListItemProps) {
   const isRemoving = useSharedValue(false);
   const translateX = useSharedValue(0);
 
@@ -118,7 +118,7 @@ function ListItem({ item, onRemove }: ListItemProps) {
       if (evt.velocityX < -20) {
         translateX.value = withSpring(
           MAX_TRANSLATE,
-          springConfig(evt.velocityX)
+          springConfig(evt.velocityX),
         );
       } else {
         translateX.value = withSpring(0, springConfig(evt.velocityX));
@@ -181,17 +181,17 @@ type ButtonData = {
   color: string;
   onPress: () => void;
 };
-function Button({ item }: { item: ButtonData }) {
+function Button({item}: {item: ButtonData}) {
   return (
-    <View style={[s.button, { backgroundColor: item.backgroundColor }]}>
+    <View style={[s.button, {backgroundColor: item.backgroundColor}]}>
       <TouchableOpacity onPress={item.onPress} style={s.buttonInner}>
-        <Text style={{ color: item.color }}>{item.title}</Text>
+        <Text style={{color: item.color}}>{item.title}</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-function ListItemContent({ item }: { item: Data }) {
+function ListItemContent({item}: {item: Data}) {
   return (
     <View style={s.itemContainer}>
       <View style={s.avatarContainer}>

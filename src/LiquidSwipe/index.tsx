@@ -1,1 +1,1 @@
-export { default, assets } from './LiquidSwipe';
+export {default, assets} from './LiquidSwipe';

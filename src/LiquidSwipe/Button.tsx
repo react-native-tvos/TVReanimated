@@ -1,19 +1,19 @@
 import React from 'react';
-import { Dimensions, Text } from 'react-native';
+import {Dimensions, Text} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const size = 50;
 
 type ButtonProps = {
   progress: Animated.SharedValue<number>;
   y: Animated.SharedValue<number>;
 };
-function Button({ progress, y }: ButtonProps): React.ReactElement {
+function Button({progress, y}: ButtonProps): React.ReactElement {
   const style = useAnimatedStyle(() => {
     return {
       opacity: interpolate(progress.value, [0, 0.1], [1, 0], Extrapolate.CLAMP),
@@ -22,7 +22,7 @@ function Button({ progress, y }: ButtonProps): React.ReactElement {
           translateX: interpolate(
             progress.value,
             [0, 0.4],
-            [width - size - 8, 0]
+            [width - size - 8, 0],
           ),
         },
         {

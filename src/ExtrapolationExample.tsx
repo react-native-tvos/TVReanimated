@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import Animated, {
   useAnimatedGestureHandler,
@@ -46,11 +46,11 @@ function ExtrapolationExample(): React.ReactElement {
       interpolate(translation.y.value, [0, -75], [0, -75], {
         extrapolateLeft: Extrapolate.CLAMP,
         extrapolateRight: Extrapolate.EXTEND,
-      })
+      }),
     );
 
     return {
-      transform: [{ translateX }, { translateY: translation.y.value }],
+      transform: [{translateX}, {translateY: translation.y.value}],
     };
   });
   const button2Style = useAnimatedStyle(() => {
@@ -58,11 +58,11 @@ function ExtrapolationExample(): React.ReactElement {
       interpolate(translation.y.value, [0, -75], [0, -150], {
         extrapolateLeft: Extrapolate.CLAMP,
         extrapolateRight: Extrapolate.EXTEND,
-      })
+      }),
     );
 
     return {
-      transform: [{ translateY }],
+      transform: [{translateY}],
     };
   });
 
@@ -71,16 +71,16 @@ function ExtrapolationExample(): React.ReactElement {
       interpolate(translation.y.value, [0, -75], [0, 75], {
         extrapolateLeft: Extrapolate.CLAMP,
         extrapolateRight: Extrapolate.EXTEND,
-      })
+      }),
     );
 
     return {
-      transform: [{ translateX }, { translateY: translation.y.value }],
+      transform: [{translateX}, {translateY: translation.y.value}],
     };
   });
 
   const stylez = useAnimatedStyle(() => ({
-    transform: [{ translateY: translation.y.value }],
+    transform: [{translateY: translation.y.value}],
   }));
 
   return (
@@ -89,7 +89,7 @@ function ExtrapolationExample(): React.ReactElement {
         <Animated.View
           style={[
             styles.circle,
-            { zIndex: 1, backgroundColor: '#001a72' },
+            {zIndex: 1, backgroundColor: '#001a72'},
             stylez,
           ]}
         />

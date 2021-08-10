@@ -1,13 +1,13 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View, LogBox } from 'react-native';
+import {FlatList, StyleSheet, Text, View, LogBox} from 'react-native';
 
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import {RectButton, ScrollView} from 'react-native-gesture-handler';
 
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 
 import AnimatedStyleUpdateExample from './AnimatedStyleUpdateExample';
 import WobbleExample from './WobbleExample';
@@ -26,7 +26,7 @@ import LightboxExample from './WebSpecific/LightBoxExample';
 import LiquidSwipe from './LiquidSwipe';
 /**/
 LogBox.ignoreLogs(['Calling `getNode()`']);
-type Screens = Record<string, { screen: React.ComponentType; title?: string }>;
+type Screens = Record<string, {screen: React.ComponentType; title?: string}>;
 const SCREENS: Screens = {
   AnimatedStyleUpdate: {
     screen: AnimatedStyleUpdateExample,
@@ -80,13 +80,13 @@ const SCREENS: Screens = {
   },
   /**/
 };
-type RootStackParams = { Home: undefined } & { [key: string]: undefined };
+type RootStackParams = {Home: undefined} & {[key: string]: undefined};
 type MainScreenProps = {
   navigation: StackNavigationProp<RootStackParams, 'Home'>;
 };
 
-function MainScreen({ navigation }: MainScreenProps) {
-  const data = Object.keys(SCREENS).map((key) => ({ key }));
+function MainScreen({navigation}: MainScreenProps) {
+  const data = Object.keys(SCREENS).map((key) => ({key}));
   return (
     <FlatList
       style={styles.list}
@@ -96,7 +96,7 @@ function MainScreen({ navigation }: MainScreenProps) {
         <MainScreenItem
           {...props}
           screens={SCREENS}
-          onPressItem={({ key }) => navigation.navigate(key)}
+          onPressItem={({key}) => navigation.navigate(key)}
         />
       )}
       renderScrollComponent={(props) => <ScrollView {...props} />}
@@ -108,10 +108,10 @@ export function ItemSeparator(): React.ReactElement {
   return <View style={styles.separator} />;
 }
 
-type Item = { key: string };
+type Item = {key: string};
 type MainScreenItemProps = {
   item: Item;
-  onPressItem: ({ key }: Item) => void;
+  onPressItem: ({key}: Item) => void;
   screens: Screens;
 };
 export function MainScreenItem({
@@ -119,7 +119,7 @@ export function MainScreenItem({
   onPressItem,
   screens,
 }: MainScreenItemProps): React.ReactElement {
-  const { key } = item;
+  const {key} = item;
   return (
     <RectButton style={styles.button} onPress={() => onPressItem(item)}>
       <Text style={styles.buttonText}>{screens[key].title || key}</Text>
@@ -135,7 +135,7 @@ function App(): React.ReactElement {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          options={{ title: '🎬 Reanimated 2.x Examples' }}
+          options={{title: '🎬 Reanimated 2.x Examples'}}
           component={MainScreen}
         />
         {Object.keys(SCREENS).map((name) => (
@@ -143,7 +143,7 @@ function App(): React.ReactElement {
             key={name}
             name={name}
             getComponent={() => SCREENS[name].screen}
-            options={{ title: SCREENS[name].title || name }}
+            options={{title: SCREENS[name].title || name}}
           />
         ))}
       </Stack.Navigator>

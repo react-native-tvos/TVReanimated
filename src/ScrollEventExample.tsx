@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Platform, Dimensions } from 'react-native';
+import {View, StyleSheet, Platform, Dimensions} from 'react-native';
 import Animated, {
   useSharedValue,
   withSpring,
   useAnimatedStyle,
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
-import { useHeaderHeight } from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/stack';
 
 const size = 40;
 
@@ -45,10 +45,10 @@ function ScrollExample(): React.ReactElement {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.half, { height }]}>
+      <View style={[styles.half, {height}]}>
         <Animated.View style={[styles.box, stylez]} />
       </View>
-      <View style={[styles.half, { height }]}>
+      <View style={[styles.half, {height}]}>
         <Animated.ScrollView
           style={styles.scroll}
           scrollEventThrottle={1}

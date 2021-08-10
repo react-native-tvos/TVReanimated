@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import {View, StyleSheet, Dimensions, Text} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -16,16 +16,16 @@ import {
 } from 'react-native-gesture-handler';
 
 const data = [
-  { artist: 'Nirvana', song: 'Smells Like Teen Spirit' },
-  { artist: 'John Lennon', song: 'Imagine' },
-  { artist: 'U2', song: 'One' },
-  { artist: 'Michael Jackson', song: 'Billie Jean' },
-  { artist: 'Queen', song: 'Bohemian Rhapsody' },
-  { artist: 'The Beatles', song: 'Hey Jude' },
-  { artist: 'Bob Dylan', song: 'Like A Rolling Stone' },
-  { artist: 'Rolling Stones', song: "I Can't Get No Satisfaction" },
-  { artist: 'Sex Pistols', song: 'God Save The Queen' },
-  { artist: "Guns N' Roses", song: "Sweet Child O'Mine" },
+  {artist: 'Nirvana', song: 'Smells Like Teen Spirit'},
+  {artist: 'John Lennon', song: 'Imagine'},
+  {artist: 'U2', song: 'One'},
+  {artist: 'Michael Jackson', song: 'Billie Jean'},
+  {artist: 'Queen', song: 'Bohemian Rhapsody'},
+  {artist: 'The Beatles', song: 'Hey Jude'},
+  {artist: 'Bob Dylan', song: 'Like A Rolling Stone'},
+  {artist: 'Rolling Stones', song: "I Can't Get No Satisfaction"},
+  {artist: 'Sex Pistols', song: 'God Save The Queen'},
+  {artist: "Guns N' Roses", song: "Sweet Child O'Mine"},
 ];
 
 const ITEM_SIZE = {
@@ -87,11 +87,11 @@ function ScrollExample(): React.ReactElement {
     AnimatedGHContext
   >({
     onStart: (e, ctx) => {
-      ctx.start = { x: e.x, y: e.y };
+      ctx.start = {x: e.x, y: e.y};
       ctx.last = ctx.start;
     },
     onActive: (e, ctx) => {
-      const currentPoz = { x: e.x, y: e.y };
+      const currentPoz = {x: e.x, y: e.y};
       const lastPoz = ctx.last;
       ctx.last = currentPoz;
       if (currentPoz.x === lastPoz.x && lastPoz.y === currentPoz.y) {
@@ -119,7 +119,7 @@ function ScrollExample(): React.ReactElement {
         position.value + sign * dist * 5,
         arr,
         arr,
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       );
       scrollTo(animatedRef, position.value, 0, false);
     },
@@ -137,7 +137,7 @@ function ScrollExample(): React.ReactElement {
         scrollEventThrottle={1}
         showsHorizontalScrollIndicator={false}
         onScroll={scrollHandler}>
-        {data.map(({ artist, song }, i) => {
+        {data.map(({artist, song}, i) => {
           const uas = useAnimatedStyle(() => {
             const style: {
               opacity?: number;
@@ -163,7 +163,7 @@ function ScrollExample(): React.ReactElement {
           return (
             <Animated.View key={i} style={[styles.item, uas]}>
               <View style={styles.cover}>
-                <Text style={{ fontSize: 80, textAlign: 'center' }}>♪</Text>
+                <Text style={{fontSize: 80, textAlign: 'center'}}>♪</Text>
               </View>
               <Text style={styles.label}>{artist}</Text>
               <Text style={[styles.label, styles.songLabel]}>{song}</Text>

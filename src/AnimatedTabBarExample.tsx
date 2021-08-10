@@ -8,13 +8,8 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import {
-  View,
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {View, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faCoffee,
   faTrash,
@@ -22,11 +17,11 @@ import {
   faList,
   faReply,
 } from '@fortawesome/free-solid-svg-icons';
-import Svg, { Path } from 'react-native-svg';
+import Svg, {Path} from 'react-native-svg';
 import * as shape from 'd3-shape';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import {IconProp} from '@fortawesome/fontawesome-svg-core';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 const tabs = [
   {
@@ -55,13 +50,13 @@ const tabWidth = width / tabs.length;
 
 const getPath = () => {
   const tab = shape.line().curve(shape.curveBasis)([
-    [0, 0],
-    [tabWidth / 4, 0],
-    [tabWidth / 2, 8],
-    [tabWidth, 80],
-    [(tabWidth / 2) * 3, 8],
-    [(tabWidth / 4) * 7, 0],
-    [tabWidth * 2, 0],
+    [0, 80],
+    [tabWidth / 4, 72],
+    [tabWidth / 2, 72],
+    [tabWidth, 0],
+    [(tabWidth / 2) * 3, 72],
+    [(tabWidth / 4) * 7, 80],
+    [tabWidth * 2, 80],
   ]);
   return `${tab}`;
 };
@@ -115,16 +110,18 @@ function Button({
         position + width / 2,
       ],
       [1, 0, 0, 1],
-      Extrapolate.CLAMP
+      Extrapolate.CLAMP,
     );
     return {
       opacity: visibility,
-      transform: [{ translateY: 10 * (1 - visibility) }],
+      transform: [{translateY: 10 * (1 - visibility)}],
     };
   });
 
   return (
-    <TouchableOpacity style={styles.tab} onPress={() => (activeIndex.value = index)}>
+    <TouchableOpacity
+      style={styles.tab}
+      onPress={() => (activeIndex.value = index)}>
       <View style={styles.tab}>
         <Animated.View style={staticIconStyle}>
           <FontAwesomeIcon icon={item} color="black" size={25} />
@@ -140,10 +137,10 @@ type ActiveIconProps = {
   activeIndex: Animated.SharedValue<number>;
   width: number;
 };
-function ActiveIcon({ item, index, activeIndex, width }: ActiveIconProps) {
+function ActiveIcon({item, index, activeIndex, width}: ActiveIconProps) {
   const circleIconStyle = useAnimatedStyle(() => {
     const isActive = index === activeIndex.value;
-    const yOffset = isActive ? 0 : 80;
+    const yOffset = isActive ? 80 : 0;
     return {
       transform: [
         {
@@ -186,14 +183,14 @@ function Bar() {
 
   const indicatorStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: indicatorPosition.value }],
+      transform: [{translateX: indicatorPosition.value}],
     };
   });
 
   return (
     <View style={styles.container}>
       <Animated.View
-        style={[{ position: 'absolute', left: -tabWidth }, indicatorStyle]}>
+        style={[{position: 'absolute', left: -tabWidth}, indicatorStyle]}>
         {tabs.map((tab, index) => (
           <ActiveIcon
             index={index}
@@ -204,7 +201,7 @@ function Bar() {
           />
         ))}
         <Svg width={tabWidth * 2} height={64}>
-          <Path fill="red" {...{ d }} />
+          <Path fill="red" {...{d}} />
         </Svg>
       </Animated.View>
       {tabs.map((tab, index) => {
@@ -241,8 +238,8 @@ const tabBarStyles = StyleSheet.create({
 function TabBar(): React.ReactElement {
   return (
     <View style={tabBarStyles.container}>
-      <View style={tabBarStyles.dummyPusher} />
       <Bar />
+      <View style={tabBarStyles.dummyPusher} />
     </View>
   );
 }

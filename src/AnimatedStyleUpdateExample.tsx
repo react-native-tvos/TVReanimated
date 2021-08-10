@@ -4,7 +4,7 @@ import Animated, {
   useAnimatedStyle,
   Easing,
 } from 'react-native-reanimated';
-import { View, Button } from 'react-native';
+import {View, Button} from 'react-native';
 import React from 'react';
 
 function AnimatedStyleUpdateExample(): React.ReactElement {
@@ -29,7 +29,7 @@ function AnimatedStyleUpdateExample(): React.ReactElement {
       }}>
       <Animated.View
         style={[
-          { width: 100, height: 80, backgroundColor: 'black', margin: 30 },
+          {width: 100, height: 80, backgroundColor: 'black', margin: 30},
           style,
         ]}
       />

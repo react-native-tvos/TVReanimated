@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  RefObject,
-  Component,
-} from 'react';
+import React, {useState, useRef, useEffect, RefObject, Component} from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -15,13 +9,13 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-import { Dimensions, StyleSheet, View, Image, Platform } from 'react-native';
+import {Dimensions, StyleSheet, View, Image, Platform} from 'react-native';
 import {
   ScrollView,
   PanGestureHandler,
   TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
-import { useHeaderHeight } from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/stack';
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 
@@ -53,7 +47,7 @@ type ActiveExampleImage = {
 type onItemPressFn = (
   imageRef: RefObject<Component>,
   item: ExampleImage,
-  sv: Animated.SharedValue<number>
+  sv: Animated.SharedValue<number>,
 ) => void;
 
 type ImageListProps = {
@@ -61,7 +55,7 @@ type ImageListProps = {
   onItemPress: onItemPressFn;
 };
 
-function ImageList({ images, onItemPress }: ImageListProps) {
+function ImageList({images, onItemPress}: ImageListProps) {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {images.map((item, i) => (
@@ -76,7 +70,7 @@ type ListItemProps = {
   index: number;
   onPress: onItemPressFn;
 };
-function ListItem({ item, index, onPress }: ListItemProps) {
+function ListItem({item, index, onPress}: ListItemProps) {
   // @ts-ignore FIXME)TS) createAnimatedComponent type
   const ref = useRef<AnimatedImage>();
   const opacity = useSharedValue(1);
@@ -98,7 +92,7 @@ function ListItem({ item, index, onPress }: ListItemProps) {
     <TouchableWithoutFeedback
       style={containerStyle}
       onPress={() => onPress(ref, item, opacity)}>
-      <AnimatedImage ref={ref} source={{ uri: item.uri }} style={styles} />
+      <AnimatedImage ref={ref} source={{uri: item.uri}} style={styles} />
     </TouchableWithoutFeedback>
   );
 }
@@ -112,7 +106,7 @@ type ImageTransitionProps = {
   activeImage: ActiveExampleImage;
   onClose: () => void;
 };
-function ImageTransition({ activeImage, onClose }: ImageTransitionProps) {
+function ImageTransition({activeImage, onClose}: ImageTransitionProps) {
   const {
     x,
     item,
@@ -122,7 +116,7 @@ function ImageTransition({ activeImage, onClose }: ImageTransitionProps) {
     targetHeight,
     sv: imageOpacity,
   } = activeImage;
-  const { uri } = item;
+  const {uri} = item;
 
   const headerHeight = useHeaderHeight();
   const y = activeImage.y - headerHeight;
@@ -134,7 +128,7 @@ function ImageTransition({ activeImage, onClose }: ImageTransitionProps) {
 
   const targetX = useSharedValue(0);
   const targetY = useSharedValue(
-    (dimensions.height - targetHeight) / 2 - headerHeight
+    (dimensions.height - targetHeight) / 2 - headerHeight,
   );
 
   const translateX = useSharedValue(0);
@@ -149,14 +143,14 @@ function ImageTransition({ activeImage, onClose }: ImageTransitionProps) {
         translateY.value,
         [-200, 0, 200],
         [0.65, 1, 0.65],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       );
 
       backdropOpacity.value = interpolate(
         translateY.value,
         [-100, 0, 100],
         [0, 1, 0],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       );
     },
 
@@ -227,14 +221,14 @@ function ImageTransition({ activeImage, onClose }: ImageTransitionProps) {
 
       <PanGestureHandler onGestureEvent={onPan}>
         <Animated.View style={StyleSheet.absoluteFillObject}>
-          <AnimatedImage source={{ uri }} style={imageStyles} />
+          <AnimatedImage source={{uri}} style={imageStyles} />
         </Animated.View>
       </PanGestureHandler>
     </View>
   );
 }
 
-const images: ExampleImage[] = Array.from({ length: 30 }, (_, index) => {
+const images: ExampleImage[] = Array.from({length: 30}, (_, index) => {
   return {
     uri: `https://picsum.photos/id/${index + 10}/400/400`,
     width: dimensions.width,
@@ -244,13 +238,13 @@ const images: ExampleImage[] = Array.from({ length: 30 }, (_, index) => {
 
 function LightboxExample(): React.ReactElement {
   const [activeImage, setActiveImage] = useState<ActiveExampleImage | null>(
-    null
+    null,
   );
 
   function onItemPress(
     imageRef: RefObject<Component>,
     item: ExampleImage,
-    sv: Animated.SharedValue<number>
+    sv: Animated.SharedValue<number>,
   ) {
     imageRef.current?.measure?.((_x, _y, width, height, pageX, pageY) => {
       if (width === 0 && height === 0) {
@@ -283,7 +277,7 @@ function LightboxExample(): React.ReactElement {
     Platform.OS === 'web' ? dimensions.height - headerHeight : undefined;
 
   return (
-    <View style={[styles.container, { height }]}>
+    <View style={[styles.container, {height}]}>
       <ImageList onItemPress={onItemPress} images={images} />
 
       {activeImage && (

@@ -18,7 +18,7 @@ import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
-import { useHeaderHeight } from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/stack';
 
 const windowDimensions = Dimensions.get('window');
 
@@ -45,8 +45,8 @@ function friction(value: number) {
     1,
     Math.min(
       MAX_FRICTION,
-      1 + (Math.abs(value) * (MAX_FRICTION - 1)) / MAX_VALUE
-    )
+      1 + (Math.abs(value) * (MAX_FRICTION - 1)) / MAX_VALUE,
+    ),
   );
 
   if (value < 0) {
@@ -123,7 +123,7 @@ function ScrollableView({
   });
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <PanGestureHandler onGestureEvent={handler}>
         <Animated.View style={animatedStyles}>
           <View onLayout={onLayout}>{children}</View>
@@ -133,7 +133,7 @@ function ScrollableView({
   );
 }
 
-function Box({ color }: { color: string }) {
+function Box({color}: {color: string}) {
   return (
     <View
       style={{
@@ -153,7 +153,7 @@ function Example(): React.ReactElement {
     Platform.OS === 'web' ? windowDimensions.height - headerHeight : undefined;
 
   return (
-    <View style={[styles.wrapper, { height }]}>
+    <View style={[styles.wrapper, {height}]}>
       <ScrollableView>
         {colors.map((color) => (
           <Box color={color} key={color} />

@@ -6,7 +6,7 @@ import Animated, {
   withRepeat,
   withSequence,
 } from 'react-native-reanimated';
-import { View, Button, StyleSheet } from 'react-native';
+import {View, Button, StyleSheet} from 'react-native';
 import React from 'react';
 
 const ANGLE = 9;
@@ -18,7 +18,7 @@ function WobbleExample(): React.ReactElement {
 
   const style = useAnimatedStyle(() => {
     return {
-      transform: [{ rotateZ: `${rotation.value}deg` }],
+      transform: [{rotateZ: `${rotation.value}deg`}],
     };
   });
 
@@ -34,7 +34,7 @@ function WobbleExample(): React.ReactElement {
         onPress={() => {
           rotation.value = withSequence(
             // deviate left to start from -ANGLE
-            withTiming(-ANGLE, { duration: TIME / 2, easing: EASING }),
+            withTiming(-ANGLE, {duration: TIME / 2, easing: EASING}),
             // wobble between -ANGLE and ANGLE 7 times
             withRepeat(
               withTiming(ANGLE, {
@@ -42,10 +42,10 @@ function WobbleExample(): React.ReactElement {
                 easing: EASING,
               }),
               7,
-              true
+              true,
             ),
             // go back to 0 at the end
-            withTiming(0, { duration: TIME / 2, easing: EASING })
+            withTiming(0, {duration: TIME / 2, easing: EASING}),
           );
         }}
       />

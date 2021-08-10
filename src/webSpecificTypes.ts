@@ -20,8 +20,8 @@ declare module 'react' {
         width: number,
         height: number,
         pageX: number,
-        pageY: number
-      ) => void
+        pageY: number,
+      ) => void,
     ): void;
   }
 }

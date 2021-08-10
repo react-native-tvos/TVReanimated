@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
 
-const { height, width } = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 
 export const initialVertRadius = 82;
 export const maxVertRadius = height * 0.9;

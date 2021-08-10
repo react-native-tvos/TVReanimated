@@ -1,13 +1,24 @@
 import React from 'react';
-import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, TVMenuControl, View, LogBox } from 'react-native';
+import {
+  FlatList,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TVMenuControl,
+  View,
+  LogBox,
+} from 'react-native';
 
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
+
+import 'react-native/tvos-types.d';
 
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 
 import Reanimated1 from '../reanimated1/App';
 
@@ -27,7 +38,10 @@ import LiquidSwipe from './LiquidSwipe';
 import ScrollExample from './AnimatedScrollExample';
 LogBox.ignoreLogs(['Calling `getNode()`']);
 
-type Screens = Record<string, { screen: React.ComponentType; title?: string }>;
+type Screens = Record<
+  string,
+  {screen: React.ComponentType; title?: string; tv?: boolean}
+>;
 
 const SCREENS: Screens = {
   AnimatedStyleUpdate: {
@@ -102,14 +116,16 @@ const SCREENS: Screens = {
   },
 };
 
-type RootStackParams = { Home: undefined } & { [key: string]: undefined };
+type RootStackParams = {Home: undefined} & {[key: string]: undefined};
 type MainScreenProps = {
   navigation: StackNavigationProp<RootStackParams, 'Home'>;
   setUseRea2: (useRea2: boolean) => void;
 };
 
-function MainScreen({ navigation, setUseRea2 }: MainScreenProps) {
-  const data = Object.keys(SCREENS).filter((key) => SCREENS[key].tv || !Platform.isTV).map((key) => ({ key }));
+function MainScreen({navigation, setUseRea2}: MainScreenProps) {
+  const data = Object.keys(SCREENS)
+    .filter((key) => SCREENS[key].tv || !Platform.isTV)
+    .map((key) => ({key}));
   return (
     <FlatList
       style={styles.list}
@@ -119,7 +135,7 @@ function MainScreen({ navigation, setUseRea2 }: MainScreenProps) {
         <MainScreenItem
           {...props}
           screens={SCREENS}
-          onPressItem={({ key }) => navigation.navigate(key)}
+          onPressItem={({key}) => navigation.navigate(key)}
         />
       )}
       renderScrollComponent={(props) => <ScrollView {...props} />}
@@ -132,10 +148,10 @@ export function ItemSeparator(): React.ReactElement {
   return <View style={styles.separator} />;
 }
 
-type Item = { key: string };
+type Item = {key: string};
 type MainScreenItemProps = {
   item: Item;
-  onPressItem: ({ key }: Item) => void;
+  onPressItem: ({key}: Item) => void;
   screens: Screens;
 };
 export function MainScreenItem({
@@ -143,7 +159,7 @@ export function MainScreenItem({
   onPressItem,
   screens,
 }: MainScreenItemProps): React.ReactElement {
-  const { key } = item;
+  const {key} = item;
   return (
     <TouchableOpacity style={styles.button} onPress={() => onPressItem(item)}>
       <Text style={styles.buttonText}>{screens[key].title || key}</Text>
@@ -159,7 +175,9 @@ function LaunchReanimated1({
   return (
     <>
       <ItemSeparator />
-      <TouchableOpacity style={styles.button} onPress={() => setUseRea2?.(false)}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setUseRea2?.(false)}>
         <Text style={styles.buttonText}>👵 Reanimated 1.x Examples</Text>
       </TouchableOpacity>
     </>
@@ -197,9 +215,9 @@ function App(): React.ReactElement {
   );
 }
 
-const scale = Platform.isTVOS ? 1.0 : 0.5;
+const scale = Platform.isTV && Platform.OS === 'ios' ? 1.0 : 0.5;
 
-const headerOptions = (title) => {
+const headerOptions = (title: string) => {
   return {
     title,
     headerTitleStyle: styles.headerTitle,
@@ -234,7 +252,5 @@ export const styles = StyleSheet.create({
     height: 200 * scale,
   },
 });
-
-
 
 export default App;

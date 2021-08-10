@@ -1,4 +1,4 @@
-import React, { useState, useEffect, RefObject } from 'react';
+import React, {useState, useEffect, RefObject} from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -27,7 +27,7 @@ import {
   TapGestureHandler,
   TapGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
-import { useHeaderHeight } from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/stack';
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 
@@ -58,7 +58,7 @@ type ActiveExampleImage = ActiveExampleImageProperties & {
 type onItemPressFn = <T>(
   animatedRef: RefObject<T>,
   item: ExampleImage,
-  svs: ActiveExampleImageProperties
+  svs: ActiveExampleImageProperties,
 ) => void;
 function ImageList({
   images,
@@ -81,7 +81,7 @@ type ListItemProps = {
   index: number;
   onPress: onItemPressFn;
 };
-function ListItem({ item, index, onPress }: ListItemProps) {
+function ListItem({item, index, onPress}: ListItemProps) {
   // @ts-ignore: FIXME(TS) correct type for createAnimatedComponent
   const ref = useAnimatedRef<AnimatedImage>();
   const opacity = useSharedValue(1);
@@ -106,7 +106,7 @@ function ListItem({ item, index, onPress }: ListItemProps) {
   const y = useSharedValue(0);
 
   function handlePress() {
-    onPress(ref, item, { imageOpacity: opacity, width, height, x, y });
+    onPress(ref, item, {imageOpacity: opacity, width, height, x, y});
   }
 
   const handler = useAnimatedGestureHandler<TapGestureHandlerGestureEvent>({
@@ -132,7 +132,7 @@ function ListItem({ item, index, onPress }: ListItemProps) {
     <TouchableOpacity onPress={handlePress}>
       <TapGestureHandler onGestureEvent={handler}>
         <Animated.View style={containerStyle}>
-          <AnimatedImage ref={ref} source={{ uri: item.uri }} style={styles} />
+          <AnimatedImage ref={ref} source={{uri: item.uri}} style={styles} />
         </Animated.View>
       </TapGestureHandler>
     </TouchableOpacity>
@@ -151,8 +151,8 @@ function ImageTransition({
   activeImage: ActiveExampleImage;
   onClose: () => void;
 }) {
-  const { item, x, y, width, height, imageOpacity } = activeImage;
-  const { uri } = item;
+  const {item, x, y, width, height, imageOpacity} = activeImage;
+  const {uri} = item;
 
   let targetHeight, targetWidth, scaleFactor;
 
@@ -177,13 +177,11 @@ function ImageTransition({
 
   if (dimensions.width > dimensions.height) {
     targetY = useSharedValue(0);
-    targetX = useSharedValue(
-      (dimensions.width - targetWidth) / 2
-    );
+    targetX = useSharedValue((dimensions.width - targetWidth) / 2);
   } else {
     targetX = useSharedValue(0);
     targetY = useSharedValue(
-      (dimensions.height - targetHeight) / 2 - headerHeight
+      (dimensions.height - targetHeight) / 2 - headerHeight,
     );
   }
 
@@ -199,14 +197,14 @@ function ImageTransition({
         translateY.value,
         [-200, 0, 200],
         [0.65, 1, 0.65],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       );
 
       backdropOpacity.value = interpolate(
         translateY.value,
         [-100, 0, 100],
         [0, 1, 0],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       );
     },
 
@@ -226,7 +224,7 @@ function ImageTransition({
             },
             () => {
               runOnJS(onClose)();
-            }
+            },
           );
         });
 
@@ -256,7 +254,7 @@ function ImageTransition({
         },
         () => {
           runOnJS(onClose)();
-        }
+        },
       );
     });
 
@@ -314,14 +312,14 @@ function ImageTransition({
       <Animated.View style={[styles.backdrop, backdropStyles]} />
       <PanGestureHandler onGestureEvent={onPan}>
         <Animated.View style={StyleSheet.absoluteFillObject}>
-          <AnimatedImage source={{ uri }} style={imageStyles} />
+          <AnimatedImage source={{uri}} style={imageStyles} />
         </Animated.View>
       </PanGestureHandler>
     </View>
   );
 }
 
-const images: ExampleImage[] = Array.from({ length: 30 }, (_, index) => {
+const images: ExampleImage[] = Array.from({length: 30}, (_, index) => {
   let imageSize;
   if (dimensions.width > 800) {
     imageSize = 800;
@@ -338,14 +336,14 @@ const images: ExampleImage[] = Array.from({ length: 30 }, (_, index) => {
 
 function LightboxExample(): React.ReactElement {
   const [activeImage, setActiveImage] = useState<ActiveExampleImage | null>(
-    null
+    null,
   );
 
   function onItemPress(
     // @ts-ignore: FIXME AnimatedImage type
     animatedRef: RefObject<AnimatedImage>,
     item: ExampleImage,
-    svs: ActiveExampleImageProperties
+    svs: ActiveExampleImageProperties,
   ) {
     setActiveImage({
       animatedRef,
@@ -363,7 +361,7 @@ function LightboxExample(): React.ReactElement {
     Platform.OS === 'web' ? dimensions.height - headerHeight : undefined;
 
   return (
-    <View style={[styles.container, { height }]}>
+    <View style={[styles.container, {height}]}>
       <ImageList onItemPress={onItemPress} images={images} />
 
       {activeImage && (

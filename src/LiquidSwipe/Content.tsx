@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({
   title1: {
@@ -40,11 +40,11 @@ export default ({
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      <Image {...{ source }} />
+      <Image {...{source}} />
       <View>
-        <Text style={[styles.title1, { color }]}>{title1}</Text>
-        <Text style={[styles.title2, { color }]}>{title2}</Text>
-        <Text style={[styles.description, { color }]}>
+        <Text style={[styles.title1, {color}]}>{title1}</Text>
+        <Text style={[styles.title2, {color}]}>{title2}</Text>
+        <Text style={[styles.description, {color}]}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
           pharetra pellentesque. Donec blandit purus ut arcu vulputate, at
           rutrum sem dictum. Mauris sagittis felis interdum arcu ultrices

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import Animated, {
   useAnimatedProps,
   useDerivedValue,
 } from 'react-native-reanimated';
-import Svg, { Path } from 'react-native-svg';
+import Svg, {Path} from 'react-native-svg';
 import MaskedView from '@react-native-community/masked-view';
 
 import {
@@ -15,10 +15,10 @@ import {
   initialSideWidth,
 } from './WeaveHelpers';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-export default ({ centerY, progress, isBack, children }: any) => {
+export default ({centerY, progress, isBack, children}: any) => {
   const sideWidth = useDerivedValue(() => {
     const p1 = 0.2;
     const p2 = 0.8;
@@ -175,7 +175,7 @@ export default ({ centerY, progress, isBack, children }: any) => {
   });
 
   const maskElement = (
-    <Svg {...{ width, height }}>
+    <Svg {...{width, height}}>
       <AnimatedPath animatedProps={props} fill="black" />
     </Svg>
   );

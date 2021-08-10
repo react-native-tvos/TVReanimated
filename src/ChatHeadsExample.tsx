@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
+import {View, Dimensions, StyleSheet} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -12,11 +12,9 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
-function ChatHeads({
-  children,
-}: React.PropsWithChildren<Record<never, never>>) {
+function ChatHeads({children}: React.PropsWithChildren<Record<never, never>>) {
   const transX = useSharedValue(0);
   const transY = useSharedValue(0);
 
@@ -159,12 +157,12 @@ function Followers({
 
 function Main(): React.ReactElement {
   return (
-    <View style={{ flex: 1, margin: 50 }}>
+    <View style={{flex: 1, margin: 50}}>
       <ChatHeads>
-        <View style={[styles.head, { backgroundColor: 'black' }]} />
-        <View style={[styles.head, { backgroundColor: 'blue' }]} />
-        <View style={[styles.head, { backgroundColor: 'green' }]} />
-        <View style={[styles.head, { backgroundColor: 'yellow' }]} />
+        <View style={[styles.head, {backgroundColor: 'black'}]} />
+        <View style={[styles.head, {backgroundColor: 'blue'}]} />
+        <View style={[styles.head, {backgroundColor: 'green'}]} />
+        <View style={[styles.head, {backgroundColor: 'yellow'}]} />
       </ChatHeads>
     </View>
   );

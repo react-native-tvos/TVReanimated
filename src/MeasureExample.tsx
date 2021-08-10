@@ -1,6 +1,6 @@
-import React, { ReactElement, ReactNode, RefObject, useRef } from 'react';
-import { StyleSheet, View, Text, Platform, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, {ReactElement, ReactNode, RefObject, useRef} from 'react';
+import {StyleSheet, View, Text, Platform, TouchableOpacity} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -38,7 +38,7 @@ function createSharedVariables() {
           sectionHeaderHeight +
           1
         );
-      })
+      }),
     );
   }
   const heights = result;
@@ -50,7 +50,7 @@ function createSharedVariables() {
 }
 
 function MeasureExample(): React.ReactElement {
-  const { heights, contentHeights } = createSharedVariables();
+  const {heights, contentHeights} = createSharedVariables();
 
   return (
     <View>
@@ -80,7 +80,7 @@ function MeasureExample(): React.ReactElement {
             show={false}>
             <View
               collapsable={false}
-              style={{ height: 500, backgroundColor: 'white' }}
+              style={{height: 500, backgroundColor: 'white'}}
             />
           </Section>
         </View>
@@ -109,12 +109,12 @@ function Section({
 
   const stylez = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: height.value }],
+      transform: [{translateY: height.value}],
     };
   });
 
   return (
-    <Animated.View style={[styles.section, stylez, { zIndex: z }]}>
+    <Animated.View style={[styles.section, stylez, {zIndex: z}]}>
       <SectionHeader
         title={title}
         animatedRef={aref}
@@ -123,7 +123,7 @@ function Section({
       />
       <View>
         {React.Children.map(children, (element) =>
-          React.cloneElement(element as ReactElement, { ref: aref })
+          React.cloneElement(element as ReactElement, {ref: aref}),
         )}
       </View>
     </Animated.View>
@@ -139,12 +139,12 @@ type MeasuredDimensions = {
   pageY: number;
 };
 function asyncMeasure(
-  animatedRef: RefObject<React.Component>
+  animatedRef: RefObject<React.Component>,
 ): Promise<MeasuredDimensions> {
   return new Promise((resolve, reject) => {
     if (animatedRef && animatedRef.current) {
       animatedRef.current.measure?.((x, y, width, height, pageX, pageY) => {
-        resolve({ x, y, width, height, pageX, pageY });
+        resolve({x, y, width, height, pageX, pageY});
       });
     } else {
       reject(new Error('measure: animated ref not ready'));
@@ -165,7 +165,7 @@ function SectionHeader({
   contentHeight,
   show,
 }: SectionHeaderProps) {
-  const applyMeasure = ({ height }: ReturnType<typeof measure>) => {
+  const applyMeasure = ({height}: ReturnType<typeof measure>) => {
     'worklet';
     if (contentHeight.value === 0) {
       contentHeight.value = withTiming(height, {
@@ -222,8 +222,8 @@ function SectionHeader({
           <TouchableOpacity onPress={() => onPress()}>
             <TapGestureHandler onHandlerStateChange={handler}>
               <Animated.View
-                style={{ backgroundColor: 'gray', borderRadius: 10, padding: 5 }}>
-                <Text style={{ color: 'white' }}>trigger</Text>
+                style={{backgroundColor: 'gray', borderRadius: 10, padding: 5}}>
+                <Text style={{color: 'white'}}>trigger</Text>
               </Animated.View>
             </TapGestureHandler>
           </TouchableOpacity>
@@ -252,8 +252,8 @@ function RandomElement() {
   const label = useRef(labels[Math.round(Math.random() * 4)]);
 
   return (
-    <View style={[styles.randomElement, { height: randomHeight.current }]}>
-      <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row' }}>
+    <View style={[styles.randomElement, {height: randomHeight.current}]}>
+      <View style={{flex: 1, alignItems: 'center', flexDirection: 'row'}}>
         <Text>{label.current}</Text>
       </View>
     </View>
