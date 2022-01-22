@@ -1,0 +1,72 @@
+diff --git a/node_modules/react-native-gesture-handler/ios/Handlers/RNFlingHandler.m b/node_modules/react-native-gesture-handler/ios/Handlers/RNFlingHandler.m
+index 3936552..115350c 100644
+--- a/node_modules/react-native-gesture-handler/ios/Handlers/RNFlingHandler.m
++++ b/node_modules/react-native-gesture-handler/ios/Handlers/RNFlingHandler.m
+@@ -72,7 +72,9 @@
+   [super resetConfig];
+   UISwipeGestureRecognizer *recognizer = (UISwipeGestureRecognizer *)_recognizer;
+   recognizer.direction = UISwipeGestureRecognizerDirectionRight;
++#if !TARGET_OS_TV
+   recognizer.numberOfTouchesRequired = 1;
++#endif
+ }
+ 
+ - (void)configure:(NSDictionary *)config
+diff --git a/node_modules/react-native-gesture-handler/ios/Handlers/RNPanHandler.m b/node_modules/react-native-gesture-handler/ios/Handlers/RNPanHandler.m
+index a31dc67..7dd0172 100644
+--- a/node_modules/react-native-gesture-handler/ios/Handlers/RNPanHandler.m
++++ b/node_modules/react-native-gesture-handler/ios/Handlers/RNPanHandler.m
+@@ -236,8 +236,10 @@
+     recognizer.allowedScrollTypesMask = 0;
+   }
+ #endif
++#if !TARGET_OS_TV
+   recognizer.minimumNumberOfTouches = 1;
+   recognizer.maximumNumberOfTouches = NSUIntegerMax;
++#endif
+   recognizer.minDistSq = NAN;
+   recognizer.minVelocitySq = NAN;
+ }
+diff --git a/node_modules/react-native-gesture-handler/ios/Handlers/RNPinchHandler.m b/node_modules/react-native-gesture-handler/ios/Handlers/RNPinchHandler.m
+index a65ea4a..8d057a2 100644
+--- a/node_modules/react-native-gesture-handler/ios/Handlers/RNPinchHandler.m
++++ b/node_modules/react-native-gesture-handler/ios/Handlers/RNPinchHandler.m
+@@ -10,6 +10,7 @@
+ 
+ #import "RNPinchHandler.h"
+ 
++#if !TARGET_OS_TV
+ @interface RNBetterPinchRecognizer : UIPinchGestureRecognizer
+ 
+ - (id)initWithGestureHandler:(RNGestureHandler*)gestureHandler;
+@@ -68,6 +69,8 @@
+ 
+ @end
+ 
++#endif
++
+ @implementation RNPinchGestureHandler
+ 
+ - (instancetype)initWithTag:(NSNumber *)tag
+diff --git a/node_modules/react-native-gesture-handler/ios/Handlers/RNRotationHandler.m b/node_modules/react-native-gesture-handler/ios/Handlers/RNRotationHandler.m
+index 5223002..cc023e0 100644
+--- a/node_modules/react-native-gesture-handler/ios/Handlers/RNRotationHandler.m
++++ b/node_modules/react-native-gesture-handler/ios/Handlers/RNRotationHandler.m
+@@ -8,6 +8,8 @@
+ 
+ #import "RNRotationHandler.h"
+ 
++#if !TARGET_OS_TV
++
+ @interface RNBetterRotationRecognizer : UIRotationGestureRecognizer
+ 
+ - (id)initWithGestureHandler:(RNGestureHandler*)gestureHandler;
+@@ -67,6 +69,8 @@
+ 
+ @end
+ 
++#endif
++
+ @implementation RNRotationGestureHandler
+ 
+ - (instancetype)initWithTag:(NSNumber *)tag

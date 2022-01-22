@@ -187,7 +187,7 @@ PODS:
   - React-jsinspector (0.66.3-0)
   - React-logger (0.66.3-0):
     - glog
-  - react-native-safe-area-context (3.2.0):
+  - react-native-safe-area-context (3.3.2):
     - React-Core
   - React-perflogger (0.66.3-0)
   - React-RCTAnimation (0.66.3-0):
@@ -248,7 +248,7 @@ PODS:
     - React-perflogger (= 0.66.3-0)
   - RNCMaskedView (0.1.11):
     - React
-  - RNGestureHandler (1.10.3):
+  - RNGestureHandler (2.2.0):
     - React-Core
   - RNReanimated (2.3.1):
     - DoubleConversion
@@ -277,7 +277,7 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.4.0):
+  - RNScreens (3.10.2):
     - React-Core
     - React-RCTImage
   - RNSVG (12.1.1):
@@ -414,7 +414,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 50e1e965f7df835844bb363055a596a2f00782ab
   React-jsinspector: 961bca344b37d028fa31147b3ee92f973066376a
   React-logger: 2ede08149c5cfd3b57d1151639196d64c80bcf58
-  react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
+  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   React-perflogger: 7db35d04efa01f6afa9e43eb58a07f8950b62129
   React-RCTAnimation: b382e08174c554128723a2dcd0fafb896000217e
   React-RCTBlob: 80cc190a6271aa59c2af27e36395e5228d9de95e
@@ -426,9 +426,9 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7bbeb13e7750d45f93fdb7cb5546a1eb5ffaa5c7
   ReactCommon: 6fc4f9a125b2d5aa354f573f328086b737e5102f
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
-  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
   RNReanimated: 113b6a8d570e151aa445264efc890c609afbc428
-  RNScreens: 21b73c94c9117e1110a79ee0ee80c93ccefed8ce
+  RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   RNSVG: 4ce1d509bb19a8285c4c14e78fa72a074318fc40
   Yoga: 9efca3331f0d4023de2b109f4cc685b5394288ab
 
