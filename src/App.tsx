@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TVMenuControl,
+  TVEventControl,
   View,
   LogBox,
 } from 'react-native';
@@ -207,7 +207,7 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
 function App(): React.ReactElement {
   const [useRea2, setUseRea2] = React.useState(true);
 
-  TVMenuControl.enableTVMenuKey();
+  TVEventControl.enableTVMenuKey();
   return (
     <NavigationContainer>
       {useRea2 ? Reanimated2(setUseRea2) : Reanimated1(setUseRea2)}
