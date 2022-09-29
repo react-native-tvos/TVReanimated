@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-reanimated/RNReanimated.podspec b/node_modules/react-native-reanimated/RNReanimated.podspec
+index 3205c93..800ed90 100644
+--- a/node_modules/react-native-reanimated/RNReanimated.podspec
++++ b/node_modules/react-native-reanimated/RNReanimated.podspec
+@@ -93,7 +93,7 @@ Pod::Spec.new do |s|
+   s.license      = "MIT"
+   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
+   s.author       = { "author" => "author@domain.cn" }
+-  s.platforms    = { :ios => "9.0", :tvos => "9.0" }
++  s.platforms    = { :ios => "13.0", :tvos => "13.0" }
+   s.source       = { :git => "https://github.com/software-mansion/react-native-reanimated.git", :tag => "#{s.version}" }
+ 
+   s.source_files = [

@@ -85,7 +85,7 @@ function ListItem({item, index, onPress}: ListItemProps) {
   // @ts-ignore: FIXME(TS) correct type for createAnimatedComponent
   const ref = useAnimatedRef<AnimatedImage>();
   const opacity = useSharedValue(1);
-  const headerHeight = useHeaderHeight();
+  const headerHeight = useHeaderHeight ? useHeaderHeight() : 0;
 
   const containerStyle = {
     marginRight: (index + 1) % 4 === 0 ? 0 : GUTTER_WIDTH,
@@ -166,7 +166,7 @@ function ImageTransition({
     targetHeight = item.height / scaleFactor;
   }
 
-  const headerHeight = useHeaderHeight();
+  const headerHeight = useHeaderHeight ? useHeaderHeight() : 0;
 
   const animationProgress = useSharedValue(0);
 
@@ -356,7 +356,7 @@ function LightboxExample(): React.ReactElement {
     setActiveImage(null);
   }
 
-  const headerHeight = useHeaderHeight() - (StatusBar.currentHeight ?? 0);
+  const headerHeight = (useHeaderHeight ? useHeaderHeight() : 0) - (StatusBar.currentHeight ?? 0);
   const height =
     Platform.OS === 'web' ? dimensions.height - headerHeight : undefined;
 
