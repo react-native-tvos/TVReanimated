@@ -254,12 +254,15 @@ function RandomElement() {
   return (
     <View style={[styles.randomElement, {height: randomHeight.current}]}>
       <View style={{flex: 1, alignItems: 'center', flexDirection: 'row'}}>
-        <Text>{label.current}</Text>
+        <Text style={styles.labelText}>{label.current}</Text>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  labelText: {
+    color: 'black',
+  },
   randomElement: {
     backgroundColor: '#EFEFF4',
     alignItems: 'center',

@@ -20,8 +20,6 @@ import {
 } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-import Reanimated1 from '../reanimated1/App';
-
 import ExtrapolationExample from './ExtrapolationExample';
 import AnimatedStyleUpdateExample from './AnimatedStyleUpdateExample';
 import WobbleExample from './WobbleExample';
@@ -119,10 +117,9 @@ const SCREENS: Screens = {
 type RootStackParams = {Home: undefined} & {[key: string]: undefined};
 type MainScreenProps = {
   navigation: StackNavigationProp<RootStackParams, 'Home'>;
-  setUseRea2: (useRea2: boolean) => void;
 };
 
-function MainScreen({navigation, setUseRea2}: MainScreenProps) {
+function MainScreen({navigation}: MainScreenProps) {
   const data = Object.keys(SCREENS)
     .filter((key) => SCREENS[key].tv || !Platform.isTV)
     .map((key) => ({key}));
@@ -139,7 +136,6 @@ function MainScreen({navigation, setUseRea2}: MainScreenProps) {
         />
       )}
       renderScrollComponent={(props) => <ScrollView {...props} />}
-      ListFooterComponent={() => <LaunchReanimated1 setUseRea2={setUseRea2} />}
     />
   );
 }
@@ -167,31 +163,14 @@ export function MainScreenItem({
   );
 }
 
-function LaunchReanimated1({
-  setUseRea2,
-}: {
-  setUseRea2: (useRea2: boolean) => void;
-}) {
-  return (
-    <>
-      <ItemSeparator />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setUseRea2?.(false)}>
-        <Text style={styles.buttonText}>👵 Reanimated 1.x Examples</Text>
-      </TouchableOpacity>
-    </>
-  );
-}
-
 const Stack = createStackNavigator();
 
-const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
+const Reanimated2 = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
       options={headerOptions('🎬 Reanimated 2.x Examples')}
-      children={(props) => <MainScreen {...props} setUseRea2={setUseRea2} />}
+      children={(props) => <MainScreen {...props} />}
     />
     {Object.keys(SCREENS).map((name) => (
       <Stack.Screen
@@ -205,12 +184,10 @@ const Reanimated2 = (setUseRea2: (useRea2: boolean) => void) => (
 );
 
 function App(): React.ReactElement {
-  const [useRea2, setUseRea2] = React.useState(true);
-
   TVEventControl.enableTVMenuKey();
   return (
     <NavigationContainer>
-      {useRea2 ? Reanimated2(setUseRea2) : Reanimated1(setUseRea2)}
+      <Reanimated2 />
     </NavigationContainer>
   );
 }
@@ -235,6 +212,7 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     backgroundColor: 'transparent',
+    color: 'black',
     fontSize: 30 * scale,
   },
   button: {

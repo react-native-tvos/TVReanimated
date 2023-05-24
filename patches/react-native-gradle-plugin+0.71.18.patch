@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-native-gradle-plugin/src/main/kotlin/com/facebook/react/utils/DependencyUtils.kt b/node_modules/react-native-gradle-plugin/src/main/kotlin/com/facebook/react/utils/DependencyUtils.kt
+index cc67a93..02d04c4 100644
+--- a/node_modules/react-native-gradle-plugin/src/main/kotlin/com/facebook/react/utils/DependencyUtils.kt
++++ b/node_modules/react-native-gradle-plugin/src/main/kotlin/com/facebook/react/utils/DependencyUtils.kt
+@@ -62,10 +62,16 @@ internal object DependencyUtils {
+               .using(it.module("${groupString}:react-android:${versionString}"))
+               .because(
+                   "The react-native artifact was deprecated in favor of react-android due to https://github.com/facebook/react-native/issues/35210.")
++          it.substitute(it.module("com.facebook.react:react-android"))
++              .using(it.module("${groupString}:react-android:${versionString}"))
++              .because("The react-android dependency was modified to use the correct Maven group.")
+           it.substitute(it.module("com.facebook.react:hermes-engine"))
+               .using(it.module("${groupString}:hermes-android:${versionString}"))
+               .because(
+                   "The hermes-engine artifact was deprecated in favor of hermes-android due to https://github.com/facebook/react-native/issues/35210.")
++          it.substitute(it.module("com.facebook.react:hermes-android"))
++              .using(it.module("${groupString}:hermes-android:${versionString}"))
++              .because("The hermes-android dependency was modified to use the correct Maven group.")
+         }
+         configuration.resolutionStrategy.force(
+             "${groupString}:react-android:${versionString}",
