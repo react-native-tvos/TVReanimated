@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec b/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec
+index 3691d80..be6b584 100644
+--- a/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec
++++ b/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec
+@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
+ 
+   s.authors      = package['author']
+   s.homepage     = package['homepage']
+-  s.platforms    = { :ios => "12.4", :tvos => "11.0" }
++  s.platforms    = { :ios => "12.4", :tvos => "12.4" }
+ 
+   s.source       = { :git => "https://github.com/th3rdwave/react-native-safe-area-context.git", :tag => "v#{s.version}" }
+   s.source_files  = "ios/**/*.{h,m,mm}"
