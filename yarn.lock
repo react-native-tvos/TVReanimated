@@ -7843,10 +7843,10 @@ react-native-svg@^13.9.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
-"react-native@npm:react-native-tvos@0.71.8-0rc2":
-  version "0.71.8-0rc2"
-  resolved "https://registry.yarnpkg.com/react-native-tvos/-/react-native-tvos-0.71.8-0rc2.tgz#d8b58635734fcddccd8c407ddfd65730d688f97f"
-  integrity sha512-lTvbRIFscMyOq/cXzN5BVsMWUOJSzbYnDyKHHLiGIv6st2ikGlDnqEa42FcLzmdDIeBoX0J4SGTsWr9VEwhy4g==
+"react-native@npm:react-native-tvos@0.71.8-0rc4":
+  version "0.71.8-0rc4"
+  resolved "https://registry.yarnpkg.com/react-native-tvos/-/react-native-tvos-0.71.8-0rc4.tgz#e43b3f8d7fa4fc255a5b274ec50c1a54a4f484b3"
+  integrity sha512-s4rS3ep9Siv240YYl8MKlgC1eN6vySiwqe/OfV9oyxzYAE8oZGwPuU9SjhTh2dN/kFc8iBlezMwJoFJ6D+RKtg==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
