@@ -7799,10 +7799,10 @@ react-native-gesture-handler@^2.10.1:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
-react-native-gradle-plugin@^0.71.18:
-  version "0.71.18"
-  resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.18.tgz#20ef199bc85be32e45bb6cc069ec2e7dcb1a74a6"
-  integrity sha512-7F6bD7B8Xsn3JllxcwHhFcsl9aHIig47+3eN4IHFNqfLhZr++3ElDrcqfMzugM+niWbaMi7bJ0kAkAL8eCpdWg==
+react-native-gradle-plugin@^0.71.19:
+  version "0.71.19"
+  resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.19.tgz#3379e28341fcd189bc1f4691cefc84c1a4d7d232"
+  integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==
 
 react-native-reanimated@3.0.1:
   version "3.0.1"
@@ -7843,10 +7843,10 @@ react-native-svg@^13.9.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
-"react-native@npm:react-native-tvos@0.71.8-0rc4":
-  version "0.71.8-0rc4"
-  resolved "https://registry.yarnpkg.com/react-native-tvos/-/react-native-tvos-0.71.8-0rc4.tgz#e43b3f8d7fa4fc255a5b274ec50c1a54a4f484b3"
-  integrity sha512-s4rS3ep9Siv240YYl8MKlgC1eN6vySiwqe/OfV9oyxzYAE8oZGwPuU9SjhTh2dN/kFc8iBlezMwJoFJ6D+RKtg==
+"react-native@npm:react-native-tvos@0.71.10-0rc0":
+  version "0.71.10-0rc0"
+  resolved "https://registry.yarnpkg.com/react-native-tvos/-/react-native-tvos-0.71.10-0rc0.tgz#1684f2bbca6306f51053468f51629127ce6d3316"
+  integrity sha512-hcNeaBZrMexgYf3i5wQX8517A6Na9SwUfLZaxXXyoIAA351ZTibsaqXwzqeptolWmlrKGAxYEdPkzezoK9tn8Q==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
@@ -7873,7 +7873,7 @@ react-native-svg@^13.9.0:
     promise "^8.3.0"
     react-devtools-core "^4.26.1"
     react-native-codegen "^0.71.5"
-    react-native-gradle-plugin "^0.71.18"
+    react-native-gradle-plugin "^0.71.19"
     react-refresh "^0.4.0"
     react-shallow-renderer "^16.15.0"
     regenerator-runtime "^0.13.2"
