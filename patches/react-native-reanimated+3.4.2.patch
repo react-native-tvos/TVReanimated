@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-reanimated/RNReanimated.podspec b/node_modules/react-native-reanimated/RNReanimated.podspec
-index 67d3a7f..378ab73 100644
+index 67d3a7f..31d215a 100644
 --- a/node_modules/react-native-reanimated/RNReanimated.podspec
 +++ b/node_modules/react-native-reanimated/RNReanimated.podspec
 @@ -29,7 +29,7 @@ Pod::Spec.new do |s|
@@ -7,7 +7,45 @@ index 67d3a7f..378ab73 100644
    # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
    s.author       = { "author" => "author@domain.cn" }
 -  s.platforms    = { :ios => "9.0", :tvos => "9.0" }
-+  s.platforms    = { :ios => "13.0", :tvos => "13.0" }
++  s.platforms    = { :ios => "12.0", :tvos => "12.0" }
    s.source       = { :git => "https://github.com/software-mansion/react-native-reanimated.git", :tag => "#{s.version}" }
  
    s.source_files = [
+diff --git a/node_modules/react-native-reanimated/android/src/main/java/com/swmansion/reanimated/NodesManager.java b/node_modules/react-native-reanimated/android/src/main/java/com/swmansion/reanimated/NodesManager.java
+index 59ba0b6..ea91a45 100644
+--- a/node_modules/react-native-reanimated/android/src/main/java/com/swmansion/reanimated/NodesManager.java
++++ b/node_modules/react-native-reanimated/android/src/main/java/com/swmansion/reanimated/NodesManager.java
+@@ -203,7 +203,9 @@ public class NodesManager implements EventDispatcherListener {
+ 
+   public void performOperations() {
+     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+-      mNativeProxy.performOperations();
++      if (mNativeProxy != null) {
++        mNativeProxy.performOperations();
++      }
+     } else if (!mOperationsInBatch.isEmpty()) {
+       final Queue<NativeUpdateOperation> copiedOperationsQueue = mOperationsInBatch;
+       mOperationsInBatch = new LinkedList<>();
+@@ -302,18 +304,20 @@ public class NodesManager implements EventDispatcherListener {
+ 
+   @Override
+   public void onEventDispatch(Event event) {
++    if (mNativeProxy == null) {
++      return;
++    }
+     // Events can be dispatched from any thread so we have to make sure handleEvent is run from the
+     // UI thread.
+     if (UiThreadUtil.isOnUiThread()) {
+       handleEvent(event);
+       performOperations();
+     } else {
+-      boolean shouldSaveEvent = false;
+       String eventName = mCustomEventNamesResolver.resolveCustomEventName(event.getEventName());
+       int viewTag = event.getViewTag();
+       String key = viewTag + eventName;
+ 
+-      shouldSaveEvent |= mNativeProxy != null && mNativeProxy.isAnyHandlerWaitingForEvent(key);
++      boolean shouldSaveEvent = mNativeProxy.isAnyHandlerWaitingForEvent(key);
+       if (shouldSaveEvent) {
+         mEventQueue.offer(new CopiedEvent(event));
+       }

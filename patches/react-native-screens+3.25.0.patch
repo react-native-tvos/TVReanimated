@@ -53,3 +53,25 @@ index 86a7654..1693c8a 100644
      fun removeToolbar() {
          mAppBarLayout?.let {
              mToolbar?.let { toolbar ->
+diff --git a/node_modules/react-native-screens/ios/RNSScreen.mm b/node_modules/react-native-screens/ios/RNSScreen.mm
+index bca3fcf..4a36e65 100644
+--- a/node_modules/react-native-screens/ios/RNSScreen.mm
++++ b/node_modules/react-native-screens/ios/RNSScreen.mm
+@@ -890,6 +890,9 @@ Class<RCTComponentViewProtocol> RNSScreenCls(void)
+   }
+ 
+   // same flow as in viewWillAppear
++#if TARGET_OS_TV
++  _shouldNotify = NO;
++#else
+   if (!_isSwiping) {
+     [self.screenView notifyWillDisappear];
+     if (self.transitionCoordinator.isInteractive) {
+@@ -898,6 +901,7 @@ Class<RCTComponentViewProtocol> RNSScreenCls(void)
+   } else {
+     _shouldNotify = NO;
+   }
++#endif
+ 
+   // as per documentation of these methods
+   _goingForward = !([self isBeingDismissed] || [self isMovingFromParentViewController]);
