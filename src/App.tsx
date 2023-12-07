@@ -12,8 +12,6 @@ import {
 
 import {ScrollView} from 'react-native-gesture-handler';
 
-import 'react-native/tvos-types.d';
-
 import {
   createStackNavigator,
   StackNavigationProp,
